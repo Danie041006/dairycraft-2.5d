@@ -203,6 +203,7 @@ observador; reloj; flujo del simulador; game over; reintento.
 | `docs/capturas/captura-supervisor.png` | supervisor CIP: Tanque 2 bloqueado |
 | `docs/capturas/captura-arbol.png` | árbol del inspector |
 | `docs/capturas/hoja-arte.png` | hoja de arte |
+| `docs/capturas/captura-forzar.png` | fallo forzado y botón CIP |
 
 Las capturas de JFLAP/PIPE2 y las tablas completas de la sección 5.9 están en
 `docs/pruebas.md`; las celdas ☐ son las que el equipo completa en el aula.

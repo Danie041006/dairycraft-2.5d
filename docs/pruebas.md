@@ -175,6 +175,7 @@ Disponibles en `docs/capturas/`:
 | `captura-supervisor.png` | Tanque 2 bloqueado por el circuito CIP ocupado |
 | `captura-arbol.png` | pestaña Árbol del inspector con 12 nodos explorados |
 | `hoja-arte.png` | hoja de arte: paleta, estados, tokens, planta y HUD |
+| `captura-forzar.png` | Tanque 1 en Fallo tras usar **Forzar**; −25 y botón CIP |
 
 Las capturas de JFLAP y PIPE2 las toma el equipo; los nombres sugeridos están
 en `modelos/capturas/README.md`.

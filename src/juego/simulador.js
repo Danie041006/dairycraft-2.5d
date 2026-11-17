@@ -556,6 +556,9 @@ export class Simulador {
       } else if (ev.id === 'CIP_ok') {
         razon = 'Se dispara al validar la palabra del lenguaje de reparación.';
       }
+      if (ev.id === 'perdida_temp') {
+        razon = 'Evento no controlable. Puedes forzarlo desde el HUD: el tanque va a Fallo y pierde 25 puntos.';
+      }
       return {
         id: ev.id,
         codigo: ev.codigo,

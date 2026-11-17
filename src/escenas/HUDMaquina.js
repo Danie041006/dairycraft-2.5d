@@ -420,6 +420,7 @@ export class HUDMaquina extends Phaser.Scene {
       eventos.forEach((ev, i) => {
         const b = this.botonesEventos[i];
         const color =
+          ev.id === 'perdida_temp' ? 0xf08a3c :
           ev.color === 'verde' ? PALETA.operacion :
           ev.color === 'rojo' ? PALETA.fallo :
           PALETA.metalOscuro;
@@ -431,11 +432,19 @@ export class HUDMaquina extends Phaser.Scene {
     this.botonesEventos = [];
     this.idsEventos = ids;
     eventos.forEach((ev, i) => {
+      const esForzar = ev.id === 'perdida_temp';
       const color =
+        esForzar ? 0xf08a3c :
         ev.color === 'verde' ? PALETA.operacion :
         ev.color === 'rojo' ? PALETA.fallo :
         PALETA.metalOscuro;
-      const b = boton(this, 742, 426 + i * 26, 380, 23, `${ev.codigo} · ${ev.nombre}`, () => {
+      const etiqueta = esForzar ? `${ev.codigo} · Forzar pérdida de temperatura` : `${ev.codigo} · ${ev.nombre}`;
+      const b = boton(this, 742, 426 + i * 26, 380, 23, etiqueta, () => {
+        if (esForzar) {
+          this.sim.solicitarEvento(this.tanqueId, ev.id);
+          this.actualizar(false);
+          return;
+        }
         if (!ev.controlable) {
           this.eventoResaltado = ev.id;
           return;
@@ -444,7 +453,7 @@ export class HUDMaquina extends Phaser.Scene {
         this.actualizar(false);
       }, {
         color,
-        hover: ev.color === 'rojo' ? 0xa83232 : PALETA.panelBorde,
+        hover: esForzar ? 0xd4772a : ev.color === 'rojo' ? 0xa83232 : PALETA.panelBorde,
         fontSize: '10px',
         textoColor: PALETA.texto
       });
