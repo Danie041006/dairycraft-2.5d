@@ -176,6 +176,7 @@ Disponibles en `docs/capturas/`:
 | `captura-arbol.png` | pestaña Árbol del inspector con 12 nodos explorados |
 | `hoja-arte.png` | hoja de arte: paleta, estados, tokens, planta y HUD |
 | `captura-forzar.png` | Tanque 1 en Fallo tras usar **Forzar**; −25 y botón CIP |
+| `captura-cip-error.png` | consola CIP con P S E A + Z: muestra “Esperado: E” |
 
 Las capturas de JFLAP y PIPE2 las toma el equipo; los nombres sugeridos están
 en `modelos/capturas/README.md`.

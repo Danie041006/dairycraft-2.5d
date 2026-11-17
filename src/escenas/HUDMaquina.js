@@ -182,9 +182,10 @@ export class HUDMaquina extends Phaser.Scene {
       color: hex(PALETA.textoSuave),
       fontFamily: MONO
     }).setOrigin(1, 0).setVisible(visible);
-    this.consolaError = texto(this, 552, 508, '', {
-      fontSize: '8px',
+    this.consolaError = texto(this, 552, 506, '', {
+      fontSize: '9px',
       color: hex(PALETA.fallo),
+      fontStyle: 'bold',
       wordWrap: { width: 380 }
     }).setVisible(visible);
 
@@ -222,7 +223,7 @@ export class HUDMaquina extends Phaser.Scene {
       b.label.setVisible(visible);
       this.consolaObjetos.push(b);
     }
-    this.consolaAyuda = texto(this, 552, 498, '', {
+    this.consolaAyuda = texto(this, 552, 490, '', {
       fontSize: '8px',
       color: hex(PALETA.acento),
       wordWrap: { width: 380 }
@@ -258,7 +259,8 @@ export class HUDMaquina extends Phaser.Scene {
   agregarSimbolo(s) {
     const r = this.lenguaje.avanzar(s);
     if (!r.ok) {
-      this.error = r.motivo;
+      const esperado = r.esperado?.length ? ` Esperado: ${r.esperado.join(' / ')}.` : '';
+      this.error = `${r.motivo}${esperado}`;
     } else {
       this.error = '';
       this.palabra = this.lenguaje.palabra;

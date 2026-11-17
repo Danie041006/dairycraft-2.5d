@@ -157,11 +157,8 @@ npm run build
 
 ## Video
 
-`docs/video-demo.mp4` es una grabación base de 30 s del flujo completo
-(HUD del autómata, consola CIP, supervisor, deadlock, reintento con
-**Cupo: ON** e inspector), sin narración. El guion del video de 4 minutos y
-las tomas están en `docs/VIDEO.md`; el equipo graba la voz sobre esta base o
-repite el guion.
+El guion del video de 4 minutos y las tomas están en `docs/VIDEO.md`. El
+equipo graba el video con narración.
 
 ## Estado
 
@@ -170,8 +167,8 @@ repite el guion.
 - Capturas del juego: ✅ en `docs/capturas/`.
 - Pendiente: capturas de JFLAP/PIPE2, fps en el equipo, prueba con tableta y
   playtest con otro equipo (celdas ☐ de `docs/pruebas.md`).
-- Video y sustentación: el guion está en `docs/VIDEO.md` y la base en
-  `docs/video-demo.mp4` (30 s).
+- Video y sustentación: el guion está en `docs/VIDEO.md`; el equipo graba el
+  video de 4 minutos.
 
 ## Licencia y originalidad
 
