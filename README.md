@@ -118,6 +118,8 @@ test/                     42 pruebas con node --test
 
 | documento | contenido |
 |---|---|
+| `docs/TUTORIAL.md` | cómo jugar, cómo explicarlo en la sustentación y checklist del PDF |
+| `docs/GUIA_CIP_PETRI.md` | CIP paso a paso y red de Petri explicada |
 | `docs/GDD.md` | concepto, MDA, reglas, HUD, puntaje, logros, criterios |
 | `docs/modelo/automatas.md` | δ, eventos, palabras, DFA, supervisor |
 | `docs/modelo/petri.md` | lugares, transiciones, matrices, invariantes, deadlock |
