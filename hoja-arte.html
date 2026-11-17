@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoja de arte · DairyCraft 2.5D</title>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.min.js"></script>
+  <style>
+    html, body { margin: 0; padding: 0; background: #0b1218; color: #eaf2f5; font-family: "Trebuchet MS", sans-serif; }
+    #hoja { width: 1200px; margin: 0 auto; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <div id="hoja"></div>
+  <script type="module">
+    import { PALETA, PALETA_LISTA, COLORES_ESTADO, hex } from './src/arte/paleta.js';
+    import {
+      dibujarSuelo, dibujarMuros, dibujarSilo, dibujarTanque, dibujarCaldera,
+      dibujarChiller, dibujarEmbotelladora, dibujarCuartoFrio, dibujarToken,
+      dibujarIconoEstado, dibujarNodo, dibujarArista, dibujarPanel, dibujarBarra
+    } from './src/arte/dibujos.js';
+
+    const ESTADOS = ['Vacio', 'Llenando', 'Pasteurizando', 'Enfriando', 'Lavado_CIP', 'Fallo'];
+    const NIVELES = { Vacio: 0.15, Llenando: 0.55, Pasteurizando: 1, Enfriando: 0.92, Lavado_CIP: 0.35, Fallo: 0.25 };
+
+    class Hoja extends Phaser.Scene {
+      constructor() { super('Hoja'); }
+
+      create() {
+        this.cameras.main.setBackgroundColor(hex(PALETA.fondo));
+        const g = this.add.graphics();
+        const t = (x, y, txt, size = 12, color = PALETA.texto) =>
+          this.add.text(x, y, txt, { fontFamily: '"Trebuchet MS", sans-serif', fontSize: `${size}px`, color: hex(color) });
+
+        t(40, 24, 'DairyCraft 2.5D · Hoja de arte', 26, PALETA.leche);
+        t(40, 56, 'Paleta, máquinas por estado, tokens, planta 8×8, HUD de máquina y radar', 12, PALETA.textoSuave);
+
+        // 1. Paleta
+        t(40, 86, '1 · PALETA', 11, PALETA.acento);
+        PALETA_LISTA.slice(0, 14).forEach(([nombre, color], i) => {
+          const x = 40 + (i % 7) * 160;
+          const y = 106 + Math.floor(i / 7) * 52;
+          g.fillStyle(color, 1);
+          g.fillRoundedRect(x, y, 42, 42, 5);
+          g.lineStyle(1, PALETA.panelBorde, 0.8);
+          g.strokeRoundedRect(x, y, 42, 42, 5);
+          t(x + 50, y + 2, nombre, 9, PALETA.texto);
+          t(x + 50, y + 16, hex(color), 9, PALETA.textoSuave);
+        });
+        const estadosY = 220;
+        t(40, estadosY, '2 · ESTADOS DEL AUTÓMATA (color e ícono)', 11, PALETA.acento);
+        ESTADOS.forEach((estado, i) => {
+          const x = 90 + i * 180;
+          const y = 360;
+          dibujarIconoEstado(g, estado, x, y - 105, 13);
+          dibujarTanque(g, x, y, estado, NIVELES[estado], false);
+          t(x - 46, y + 18, estado, 10, COLORES_ESTADO[estado]);
+        });
+
+        // 2. Máquinas
+        t(40, 400, '3 · MÁQUINAS', 11, PALETA.acento);
+        dibujarSilo(g, 90, 570, 6, 10);
+        dibujarCaldera(g, 230, 570, true);
+        dibujarChiller(g, 360, 570, true);
+        dibujarEmbotelladora(g, 520, 570, 'Emb_lista');
+        dibujarCuartoFrio(g, 760, 570, 2, 4);
+        t(54, 588, 'Silo', 9, PALETA.textoSuave);
+        t(196, 600, 'Caldera', 9, PALETA.textoSuave);
+        t(318, 600, 'Bomba de frío', 9, PALETA.textoSuave);
+        t(458, 600, 'Embotelladora', 9, PALETA.textoSuave);
+        t(704, 600, 'Cuarto frío', 9, PALETA.textoSuave);
+
+        // 3. Tokens 1 / 5 / k
+        t(40, 620, '4 · TOKENS · 1, 5 y k unidades', 11, PALETA.acento);
+        const grupos = [
+          ['leche', 1], ['leche', 5], ['leche', 10],
+          ['vapor', 1], ['frio', 1], ['lote', 1],
+          ['botella', 1], ['cupo', 1], ['cupo', 4]
+        ];
+        grupos.forEach(([tipo, cantidad], i) => {
+          const x = 70 + i * 124;
+          const y = 665;
+          for (let n = 0; n < cantidad; n++) {
+            dibujarToken(g, tipo, x + (n % 5) * 10, y + Math.floor(n / 5) * 11, 0.8);
+          }
+          t(x - 8, y + 26, `${tipo} ×${cantidad}`, 8, PALETA.textoSuave);
+        });
+
+        // 4. Planta 8×8 + HUD + radar
+        t(40, 720, '5 · PLANTA 8×8, HUD DE MÁQUINA Y RADAR', 11, PALETA.acento);
+        const suelo = this.add.graphics().setDepth(-10);
+        dibujarSuelo(suelo, 8, 260, 760);
+        dibujarMuros(suelo, 8, 260, 760, 34);
+        dibujarSilo(g, 130, 900, 6, 10);
+        dibujarTanque(g, 280, 940, 'Pasteurizando', 1, true);
+        g.lineStyle(5, PALETA.metalClaro, 0.55);
+        g.lineBetween(130, 830, 280, 870);
+        g.lineBetween(280, 870, 400, 840);
+        dibujarCaldera(g, 400, 900, true);
+        t(40, 782, 'planta 8×8', 8, PALETA.textoSuave);
+
+        // HUD de máquina
+        dibujarPanel(g, 600, 740, 330, 260, { alpha: 0.98 });
+        t(614, 750, 'HUD de máquina · Tanque 1', 10, PALETA.leche);
+        const pos = {
+          Vacio: [760, 800], Llenando: [640, 860], Pasteurizando: [760, 860],
+          Enfriando: [880, 860], Fallo: [660, 930], Lavado_CIP: [800, 930]
+        };
+        const aristas = [
+          ['Vacio', 'Llenando'], ['Llenando', 'Pasteurizando'], ['Pasteurizando', 'Enfriando'],
+          ['Enfriando', 'Vacio'], ['Llenando', 'Fallo'], ['Pasteurizando', 'Fallo'],
+          ['Enfriando', 'Fallo'], ['Fallo', 'Lavado_CIP'], ['Lavado_CIP', 'Vacio']
+        ];
+        for (const [a, b] of aristas) {
+          const [x1, y1] = pos[a];
+          const [x2, y2] = pos[b];
+          dibujarArista(g, x1, y1, x2, y2, PALETA.panelBorde, 0, 1.2, 0.8);
+        }
+        for (const estado of ESTADOS) {
+          const [x, y] = pos[estado];
+          dibujarNodo(g, x, y, { actual: estado === 'Pasteurizando', marcado: estado === 'Vacio', color: COLORES_ESTADO[estado], r: 14 });
+          t(x - 14, y + 17, estado, 7, PALETA.textoSuave);
+        }
+        g.fillStyle(PALETA.operacion, 1); g.fillRoundedRect(614, 960, 86, 12, 3);
+        g.fillStyle(PALETA.fallo, 1); g.fillRoundedRect(706, 960, 86, 12, 3);
+        g.fillStyle(PALETA.metalOscuro, 1); g.fillRoundedRect(798, 960, 86, 12, 3);
+        t(618, 961, 'verde', 7, PALETA.leche);
+        t(712, 961, 'rojo', 7, PALETA.leche);
+        t(804, 961, 'gris', 7, PALETA.leche);
+
+        // Radar 3 colores
+        ['verde', 'amarillo', 'rojo'].forEach((color, i) => {
+          const x = 960;
+          const y = 740 + i * 58;
+          const col = color === 'verde' ? PALETA.operacion : color === 'amarillo' ? PALETA.espera : PALETA.fallo;
+          g.fillStyle(PALETA.panel, 0.98); g.fillRoundedRect(x, y, 200, 50, 6);
+          g.lineStyle(2, col, 1); g.strokeRoundedRect(x, y, 200, 50, 6);
+          t(x + 8, y + 6, `Radar · ${color}`, 9, col);
+          for (let n = 0; n < 5; n++) {
+            g.fillStyle(n === 2 && color === 'rojo' ? PALETA.fallo : PALETA.metal, 1);
+            g.fillCircle(x + 20 + n * 22, y + 32, n === 0 ? 3.5 : 2.2);
+            if (n > 0) {
+              g.lineStyle(1, PALETA.panelBorde, 0.7);
+              g.lineBetween(x + 20 + (n - 1) * 22, y + 32, x + 20 + n * 22, y + 32);
+            }
+          }
+        });
+        t(960, 916, 'verde: sin deadlock · amarillo: alcanzable · rojo: muerto', 8, PALETA.textoSuave);
+      }
+    }
+
+    new Phaser.Game({
+      type: Phaser.AUTO,
+      width: 1200,
+      height: 1100,
+      parent: 'hoja',
+      backgroundColor: '#0b1218',
+      scene: [Hoja]
+    });
+  </script>
+</body>
+</html>
