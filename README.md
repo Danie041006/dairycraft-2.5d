@@ -11,6 +11,17 @@ estados, un lenguaje regular de reparación CIP, un supervisor de un único
 circuito CIP y una red de Petri de 11 lugares y 6 transiciones con un lugar
 monitor de prevención del deadlock.
 
+## Video tutorial
+
+**3:58 · 1280×720 · voz en español y subtítulos incrustados.** Recorre el
+juego, la reparación CIP (`P S E A Z` → **Esperado: E**), el supervisor, la red
+de Petri en vivo, el deadlock y la prevención con `Cupo: ON`.
+
+- Ver en GitHub: https://github.com/Danie041006/dairycraft-2.5d/blob/main/docs/video-tutorial.mp4
+- Archivo: [`docs/video-tutorial.mp4`](docs/video-tutorial.mp4)
+- Capítulos y detalles: [`docs/VIDEO.md`](docs/VIDEO.md)
+- Juego publicado: https://dairycraft-2-5d.vercel.app/
+
 ## Requisitos
 
 - Node.js **24 LTS** (o 22 LTS) y npm.
@@ -127,7 +138,9 @@ test/                     42 pruebas con node --test
 | `docs/pruebas.md` | tablas 5.2 y 5.9 |
 | `docs/INFORME.md` | informe del laboratorio |
 | `docs/POSTMORTEM.md` | postmortem |
-| `docs/VIDEO.md` | guion del video de 4 minutos |
+| `docs/VIDEO.md` | video tutorial publicado, capítulos y detalles de producción |
+| `docs/video-tutorial.mp4` | video de 3:58 con voz y subtítulos |
+| `docs/petri.svg` | diagrama de la red de Petri (fuente en `docs/petri.dot`) |
 | `PROMPTS.md` | 17 prompts, resultados y correcciones |
 | `modelos/README.md` | cómo abrir y verificar en JFLAP/PIPE2 |
 
@@ -159,8 +172,10 @@ npm run build
 
 ## Video
 
-El guion del video de 4 minutos y las tomas están en `docs/VIDEO.md`. El
-equipo graba el video con narración.
+El video tutorial está publicado en
+[`docs/video-tutorial.mp4`](docs/video-tutorial.mp4) (3:58, 1280×720, voz en
+español y subtítulos). Los capítulos, el guion y la explicación de cómo se
+produjo están en [`docs/VIDEO.md`](docs/VIDEO.md).
 
 ## Estado
 
@@ -169,8 +184,9 @@ equipo graba el video con narración.
 - Capturas del juego: ✅ en `docs/capturas/`.
 - Pendiente: capturas de JFLAP/PIPE2, fps en el equipo, prueba con tableta y
   playtest con otro equipo (celdas ☐ de `docs/pruebas.md`).
-- Video y sustentación: el guion está en `docs/VIDEO.md`; el equipo graba el
-  video de 4 minutos.
+- Video tutorial: ✅ publicado en `docs/video-tutorial.mp4` y enlazado en
+  GitHub; capítulos en `docs/VIDEO.md`.
+- Sustentación de 15 min: ☐ ensayar con `docs/TUTORIAL.md`.
 
 ## Licencia y originalidad
 

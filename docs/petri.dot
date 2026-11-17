@@ -1,0 +1,55 @@
+digraph Petri {
+  rankdir=LR;
+  splines=ortho;
+  outputorder=edgesfirst;
+  bgcolor="transparent";
+  nodesep=0.35;
+  ranksep=0.55;
+  pad=0.25;
+  node [fontname="Helvetica", fontsize=16];
+  edge [color="#4c5f6a", penwidth=1.3, arrowsize=0.75];
+
+  leche    [shape=circle, style=filled, fillcolor="#16242d", color="#6f8794", fontcolor="#dce9ef", width=1.30, fixedsize=true, label="Leche\n6/10"];
+  tanque   [shape=circle, style=filled, fillcolor="#16242d", color="#6f8794", fontcolor="#dce9ef", width=1.30, fixedsize=true, label="Tanque\n3/3"];
+  vapor    [shape=circle, style=filled, fillcolor="#16242d", color="#6f8794", fontcolor="#dce9ef", width=1.30, fixedsize=true, label="Vapor\n1/1"];
+  frio     [shape=circle, style=filled, fillcolor="#16242d", color="#6f8794", fontcolor="#dce9ef", width=1.30, fixedsize=true, label="Frio\n1/1"];
+  cupo     [shape=circle, style=filled, fillcolor="#16242d", color="#6f8794", fontcolor="#dce9ef", width=1.30, fixedsize=true, label="Cupo\n0/4"];
+  loteP    [shape=circle, style=filled, fillcolor="#16242d", color="#6f8794", fontcolor="#dce9ef", width=1.30, fixedsize=true, label="Lote_past\n0/3"];
+  loteE    [shape=circle, style=filled, fillcolor="#16242d", color="#6f8794", fontcolor="#dce9ef", width=1.30, fixedsize=true, label="Lote_enfr\n0/3"];
+  cuarto   [shape=circle, style=filled, fillcolor="#16242d", color="#6f8794", fontcolor="#dce9ef", width=1.30, fixedsize=true, label="Cuarto\n0/4"];
+  embL     [shape=circle, style=filled, fillcolor="#16242d", color="#6f8794", fontcolor="#dce9ef", width=1.30, fixedsize=true, label="Emb_lista\n1/1"];
+  embP     [shape=circle, style=filled, fillcolor="#16242d", color="#6f8794", fontcolor="#dce9ef", width=1.60, fixedsize=true, label="Emb_parada\n0/1"];
+  botellas [shape=circle, style=filled, fillcolor="#16242d", color="#6f8794", fontcolor="#dce9ef", width=1.30, fixedsize=true, label="Botellas\n0"];
+
+  t_iniciar_past [shape=box, style=filled, fillcolor="#8fa6b2", color="#c7d3da", fontcolor="#0b1218", width=1.40, height=0.36, fixedsize=true, label="iniciar"];
+  t_fin_past    [shape=box, style=filled, fillcolor="#8fa6b2", color="#c7d3da", fontcolor="#0b1218", width=1.40, height=0.36, fixedsize=true, label="fin_past"];
+  t_fin_enfr    [shape=box, style=filled, fillcolor="#8fa6b2", color="#c7d3da", fontcolor="#0b1218", width=1.40, height=0.36, fixedsize=true, label="fin_enfr"];
+  t_embotellar     [shape=box, style=filled, fillcolor="#8fa6b2", color="#c7d3da", fontcolor="#0b1218", width=1.55, height=0.36, fixedsize=true, label="embotellar"];
+  t_parar_emb   [shape=box, style=filled, fillcolor="#8fa6b2", color="#c7d3da", fontcolor="#0b1218", width=1.30, height=0.36, fixedsize=true, label="parar"];
+  t_arrancar_emb     [shape=box, style=filled, fillcolor="#8fa6b2", color="#c7d3da", fontcolor="#0b1218", width=1.40, height=0.36, fixedsize=true, label="arrancar"];
+
+  leche -> t_iniciar_past [color="#5c7280", penwidth=1.5];
+  tanque -> t_iniciar_past [color="#4f8fd6", penwidth=1.7];
+  vapor -> t_iniciar_past [color="#e0a34a", penwidth=1.7];
+  cupo -> t_iniciar_past [color="#e0c04a", penwidth=1.7];
+  t_iniciar_past -> loteP [color="#5c7280", penwidth=1.5];
+  loteP -> t_fin_past [color="#5c7280", penwidth=1.5];
+  frio -> t_fin_past [color="#53c2d6", penwidth=1.7];
+  t_fin_past -> loteE [color="#5c7280", penwidth=1.5];
+  t_fin_past -> vapor [color="#e0a34a", penwidth=1.7];
+  loteE -> t_fin_enfr [color="#5c7280", penwidth=1.5];
+  t_fin_enfr -> cuarto [color="#5c7280", penwidth=1.5];
+  t_fin_enfr -> frio [color="#53c2d6", penwidth=1.7];
+  t_fin_enfr -> tanque [color="#4f8fd6", penwidth=1.7];
+  cuarto -> t_embotellar [color="#5c7280", penwidth=1.5];
+  embL -> t_embotellar [color="#63c07d", penwidth=1.7];
+  t_embotellar -> botellas [color="#5c7280", penwidth=1.5];
+  t_embotellar -> embL [color="#63c07d", penwidth=1.7];
+  t_embotellar -> cupo [color="#e0c04a", penwidth=1.7];
+  embL -> t_parar_emb [color="#63c07d", penwidth=1.7];
+  t_parar_emb -> embP [color="#63c07d", penwidth=1.7];
+  embP -> t_arrancar_emb [color="#63c07d", penwidth=1.7];
+  t_arrancar_emb -> embL [color="#63c07d", penwidth=1.7];
+  vapor -> t_arrancar_emb [color="#e0a34a", penwidth=1.7];
+  t_arrancar_emb -> vapor [color="#e0a34a", penwidth=1.7];
+}

@@ -4,6 +4,9 @@ Esta guía responde dos preguntas: **cómo se repara un tanque con la expresión
 regular** y **cómo leer la red de Petri del juego**. Al final están los pasos
 para la entrega y el despliegue.
 
+**Video:** [`docs/video-tutorial.mp4`](video-tutorial.mp4) (3:58). El capítulo
+04 muestra el CIP y el 06 la red de Petri con el marcado en vivo.
+
 ---
 
 ## 1. Reparación CIP paso a paso

@@ -2,14 +2,15 @@
 
 Guía para el equipo y para la sustentación. Complementa
 `docs/GUIA_CIP_PETRI.md` (CIP y red de Petri en detalle) y
-`docs/VIDEO.md` (guion del video).
+`docs/VIDEO.md` (video publicado y capítulos).
 
 - **Juego local:** `http://localhost:5180/` (o `http://172.31.188.192:5180/`)
 - **Juego publicado:** https://dairycraft-2-5d.vercel.app/
 - **Hoja de arte:** `http://localhost:5181/hoja-arte.html`
 - **Repositorio:** https://github.com/Danie041006/dairycraft-2.5d
 - **Guía CIP/Petri:** `docs/GUIA_CIP_PETRI.md`
-- **Video:** `docs/VIDEO.md`
+- **Video:** [`docs/video-tutorial.mp4`](video-tutorial.mp4) (3:58, voz y subtítulos)
+- **Capítulos del video:** `docs/VIDEO.md`
 
 ---
 
@@ -260,15 +261,15 @@ con JFLAP/PIPE2:
 | `src/sed/` + JSON + `npm test` | ✅ 42/42 |
 | Repositorio GitHub con README e historial | ✅ |
 | `PROMPTS.md` con los 17 prompts | ✅ |
-| Video de 4 min (HUD, CIP, supervisor, deadlock) | ☐ guion en `docs/VIDEO.md` |
+| Video de 4 min (HUD, CIP, supervisor, deadlock) | ✅ `docs/video-tutorial.mp4` (3:58, voz y subtítulos) |
 | Informe con tablas 5.2/5.9 y postmortem | ✅ borradores; ☐ filas manuales (fps, tableta, playtest, JFLAP/PIPE2) |
 | URL pública Vercel | ✅ `https://dairycraft-2-5d.vercel.app/` |
 | Prueba en tableta, fps y playtest | ☐ |
 | Sustentación de 15 min | ☐ ensayar con este tutorial |
 
 **Lo más urgente para el docente:** las capturas de **JFLAP/PIPE2** (revisa
-las tablas antes de autorizar la Fase 2). Después: el **video**, el **ZIP en
-el aula** y las filas manuales del informe.
+las tablas antes de autorizar la Fase 2). Después: el **ZIP en el aula** y las
+filas manuales del informe.
 
 ---
 
@@ -289,5 +290,5 @@ npm run modelos   # regenera .jff y .pnml
 - Pruebas: `docs/pruebas.md`
 - Informe: `docs/INFORME.md`
 - Postmortem: `docs/POSTMORTEM.md`
-- Video: `docs/VIDEO.md`
+- Video: `docs/video-tutorial.mp4` · capítulos en `docs/VIDEO.md`
 - Prompts: `PROMPTS.md`

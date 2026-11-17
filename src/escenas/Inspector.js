@@ -277,13 +277,13 @@ export class Inspector extends Phaser.Scene {
       const a = posiciones.get(e.de);
       const b = posiciones.get(e.a);
       if (!a || !b) continue;
-      g.lineStyle(1, PALETA.panelBorde, 0.45);
+      g.lineStyle(1.6, PALETA.textoSuave, 0.48);
       g.lineBetween(a.x, a.y + 4, b.x, b.y - 4);
     }
     for (const [, p] of posiciones) {
       const muerto = p.n.muerto;
       g.fillStyle(muerto ? PALETA.fallo : p.n.id === 'M0' ? PALETA.acento : PALETA.metal, 0.95);
-      g.fillCircle(p.x, p.y, p.n.id === 'M0' ? 6 : 4);
+      g.fillCircle(p.x, p.y, p.n.id === 'M0' ? 7 : 5);
       if (muerto) {
         g.lineStyle(1.5, PALETA.fallo, 0.9);
         g.strokeCircle(p.x, p.y, 8);

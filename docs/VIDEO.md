@@ -1,42 +1,68 @@
-# Guion del video · máximo 4 minutos
+# Video tutorial · DairyCraft 2.5D
 
-Objetivo: mostrar el HUD del autómata, una reparación por expresión regular,
-el supervisor CIP y un deadlock provocado y luego prevenido en el radar.
-Grabar la pantalla del simulador a 1280 × 720 o 1920 × 1080, con el navegador
-en pantalla completa y el juego a velocidad ×2 o ×4.
+**Duración:** 3:58 · **Formato:** MP4 1280×720 · H.264 + AAC · **Voz:**
+español (es-CO) · **Subtítulos:** incrustados en el video.
 
-| tiempo | plano | qué se hace | qué se dice |
-|---|---|---|---|
-| 0:00–0:15 | Título | “Iniciar turno”; la planta isométrica | “DairyCraft 2.5D: una planta láctea donde cada máquina obedece un autómata y cada recurso una red de Petri.” |
-| 0:15–0:40 | Planta | Abrir válvula del Tanque 1; esperar el llenado; mostrar los tokens del HUD | “Tres tanques comparten caldera, frío, embotelladora y cuarto frío. El silo empieza con 6 tokens y llega leche cada 15 segundos.” |
-| 0:40–1:20 | HUD del Tanque 1 | Clic en el tanque; señalar el nodo iluminado, Γ(q), el botón rojo si falta vapor, el historial | “El grafo es el mismo de JFLAP. El estado actual se ilumina; los botones verdes son controlables, los grises no controlables y los rojos los deshabilita el supervisor o la red.” |
-| 1:20–1:35 | HUD | Iniciar pasteurización; mostrar `Lote_past`, `Vapor_disp = 0`; al terminar, `Lote_enfr` | “`t_iniciar_past` es un AND-join: leche, tanque, vapor y cupo. El vapor queda retenido hasta `t_fin_past`.” |
-| 1:35–2:10 | CIP | Provocar un fallo con **Forzar** en un tanque en Llenando; **Iniciar CIP**; escribir `PSAEZ` (inválida) y luego `PSESEAEZ` (válida) | “La consola valida el lenguaje P(SE)+AEZ. PSAEZ falla porque falta el enjuague después de la soda; PSESEAEZ repara y dispara CIP_ok.” |
-| 2:10–2:35 | Supervisor | Con el Tanque 1 en CIP, abrir el Tanque 2 en Fallo e intentar **Iniciar CIP**; mostrar el botón rojo y la razón | “Hay un solo circuito CIP: el supervisor deshabilita iniciar_CIP en los demás tanques. En la prueba de 10 000 eventos nunca hay dos tanques en CIP.” |
-| 2:35–3:10 | Embotelladora / cuarto frío | Detener la embotelladora; embotellar 4 lotes; dejar un lote en pasteurización y otro en enfriamiento | “El cuarto frío es estricto: 4 lotes. La embotelladora detenida necesita vapor para arrancar; el vapor y el frío están retenidos.” |
-| 3:10–3:35 | Radar / game over | Mostrar el radar en **amarillo** y luego **rojo**; aparece “Game over por interbloqueo” con el marcado y la secuencia | “El radar mira tres disparos hacia adelante. El marcado muerto es `[0,1,0,0,1,1,4,0,1,0,0]`: espera circular entre vapor, frío y cuarto frío.” |
-| 3:35–3:50 | Reintento | **Reintentar desde el último verde**; activar **Cupo: ON**; repetir la operación; el radar vuelve a verde | “Cupo_frio consume en t_iniciar_past y devuelve en t_embotellar; el invariante limita el circuito a 4 lotes y el deadlock es inalcanzable.” |
-| 3:50–4:00 | Inspector / cierre | Abrir el inspector (`I`); mostrar Pre, M y la ecuación; volver a la planta | “El inspector muestra M_k = M_{k-1} + A^T u_k. Modelo verificado, juego probado: 42 pruebas en Node y build sin errores.” |
+El video muestra el juego y la red de Petri al mismo tiempo: a la izquierda el
+simulador, a la derecha el capítulo, el marcado en vivo y los badges de
+`Cupo` y del radar.
 
-## Lista de tomas
+- **Archivo en el repositorio:** [`docs/video-tutorial.mp4`](video-tutorial.mp4)
+- **Ver en GitHub:** https://github.com/Danie041006/dairycraft-2.5d/blob/main/docs/video-tutorial.mp4
+- **Descarga directa:** https://raw.githubusercontent.com/Danie041006/dairycraft-2.5d/main/docs/video-tutorial.mp4
+- **Juego publicado:** https://dairycraft-2-5d.vercel.app/
+- **Guía escrita:** [`docs/TUTORIAL.md`](TUTORIAL.md) y
+  [`docs/GUIA_CIP_PETRI.md`](GUIA_CIP_PETRI.md)
 
-1. `01_titulo.png` — pantalla de título con los controles.
-2. `02_planta.png` — planta con los 3 tanques en estados distintos.
-3. `03_hud.png` — HUD con el autómata y los botones de colores.
-4. `04_cip_valida.png` — consola con PSESEAEZ y el DFA en q6.
-5. `05_cip_invalida.png` — consola con PSAEZ y el error.
-6. `06_supervisor.png` — botón rojo del segundo CIP y razón.
-7. `07_tokens.png` — inspector con Pre/Post/A y M.
-8. `08_radar_amarillo.png`, `09_radar_rojo.png`, `10_radar_verde.png`.
-9. `11_resultados.png` — game over y prevención.
+## Capítulos
 
-## Consejos de grabación
+| tiempo | capítulo | qué muestra |
+|---|---|---|
+| 0:00 | Intro | título, objetivo y los tres pilares: autómatas, red de Petri y supervisor |
+| 0:19 | La planta | tres tanques, caldera, frío, embotelladora y cuarto frío \(k=4\) |
+| 0:39 | Autómata | HUD del Tanque 1, δ en vivo y ciclo completo: llenar, pasteurizar, enfriar y descargar |
+| 1:03 | CIP: error | fallo forzado, consola CIP y `P S E A Z` → **“Esperado: E”** |
+| 1:28 | CIP: válido | `P S E S E A E Z`, DFA en `q6`, `CIP_ok` y tanque en `Vacío` |
+| 1:44 | Supervisor | segundo CIP bloqueado en rojo: un solo circuito a la vez |
+| 2:03 | Red de Petri | diagrama con 11 lugares y 6 transiciones; marcado y transiciones habilitadas en vivo |
+| 2:33 | Inspector | matrices Pre/Post/A, ecuación \(M_k = M_{k-1} + A^T u_k\) y árbol de cobertura |
+| 2:52 | Deadlock | `Cupo: OFF`, cuarto frío 4/4, radar rojo y **Game over por interbloqueo** |
+| 3:17 | Prevención | reintento, `Cupo: ON`, radar verde e invariante \(Cupo + Lote_{past} + Lote_{enfr} + Cuarto = 4\) |
+| 3:42 | Cierre | 42/42 pruebas, 146/0 con monitor, 216/16/200 del supervisor y enlaces |
 
-- Grabar a ×4 para que el turno quepa; bajar a ×1 en la explicación del HUD.
-- Usar el micrófono del equipo o una voz en off; no usar música con derechos.
-- Cerrar notificaciones y dejar el navegador en 960 × 540 o 1280 × 720.
-- Ensayar la secuencia del deadlock: 4 lotes en el cuarto, embotelladora
-  detenida, un lote en pasteurización y otro en enfriamiento.
-- Si el deadlock no aparece en el primer intento, reiniciar con **Jugar otro
-  turno** y repetir; el radar debe estar en amarillo antes de detener la
-  embotelladora.
+## Qué se explica
+
+1. **El juego como interfaz del modelo.** Cada máquina es un autómata de 6
+   estados y 8 eventos; cada recurso es un lugar de la red.
+2. **La reparación CIP.** El lenguaje \(P(SE)^+AEZ\) se valida con la RegExp y
+   el DFA. La palabra `P S E A Z` no pertenece a \(L\): en `q4` la única
+   transición es `E`, y la consola lo dice con **“Esperado: E”**.
+3. **El supervisor.** `SupervisorCIP` compone los tres tanques y elimina los
+   16 estados con dos o más tanques en `Lavado_CIP`.
+4. **La red de Petri.** `t_iniciar_past` es un AND-join; el vapor es el
+   conflicto entre pasteurizar y arrancar la embotelladora; el cuarto frío es
+   estricto \(k=4\).
+5. **El deadlock y su prevención.** Sin monitor: 160 marcados y 1 deadlock.
+   Con `Cupo_frio`: 146 marcados y 0 deadlocks.
+
+## Cómo se produjo
+
+- La página [`docs/tutorial-video.html`](tutorial-video.html) monta el juego en
+  un iframe, el panel de capítulos y el marcado en vivo.
+- El diagrama de la red se genera con Graphviz desde
+  [`docs/petri.dot`](petri.dot) y se guarda como [`docs/petri.svg`](petri.svg).
+- La grabación se hizo con Playwright a 1280×720 y 25 fps; la página de
+  montaje es `docs/tutorial-video.html` y la secuencia de capítulos es la de
+  este documento.
+- La voz se generó con Edge TTS (`es-CO-SalomeNeural`, +10 %) y se mezcló con
+  `ffmpeg`; el audio se normalizó a −16 LUFS.
+- Los cortes siguen el guion de `docs/TUTORIAL.md`; el video no usa música ni
+  material de terceros.
+
+## Guion de referencia
+
+El guion inicial de 4 minutos está en el historial del repositorio. La versión
+publicada conserva el orden: intro → planta → autómata → CIP inválido → CIP
+válido → supervisor → red de Petri → inspector → deadlock → prevención →
+cierre. Si el equipo necesita regrabar, puede usar los textos de
+[`docs/TUTORIAL.md`](TUTORIAL.md) y la página `docs/tutorial-video.html`.

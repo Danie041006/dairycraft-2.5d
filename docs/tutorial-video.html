@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>DairyCraft 2.5D · tutorial</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      width: 1280px; height: 720px; margin: 0; overflow: hidden;
+      background: #0b1218; color: #eaf2f5;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+    #stage { position: relative; width: 1280px; height: 720px; }
+    #game {
+      position: absolute; left: 0; top: 0; width: 960px; height: 540px;
+      border: 0; background: #000;
+    }
+
+    /* ---------- panel derecho ---------- */
+    #panel {
+      position: absolute; left: 960px; top: 0; width: 320px; height: 540px;
+      padding: 12px 14px; background: #0e1a22; border-left: 2px solid #38505e;
+      overflow: hidden;
+    }
+    #chapterRow { display: flex; justify-content: space-between; align-items: baseline; }
+    #chapter { font-size: 10.5px; letter-spacing: 2px; color: #f2c14e; font-weight: bold; }
+    #clock { font-size: 10.5px; color: #8aa0ac; font-family: Consolas, monospace; }
+    #title { font-size: 20px; font-weight: bold; color: #f4f1e8; margin: 5px 0 0; line-height: 1.12; min-height: 45px; }
+    #badges { display: flex; gap: 6px; margin: 7px 0 0; }
+    .badge {
+      font-size: 9.5px; font-weight: bold; padding: 3px 7px; border-radius: 10px;
+      border: 1px solid #38505e; color: #cfdae0; background: #16242d;
+    }
+    .badge.on { color: #0b1218; background: #2e9e5b; border-color: #2e9e5b; }
+    .badge.off { color: #e0a34a; border-color: #7a5a2a; }
+    .badge.verde { color: #2e9e5b; border-color: #2e9e5b; }
+    .badge.amarillo { color: #f2c14e; border-color: #f2c14e; }
+    .badge.rojo { color: #ff6b6b; border-color: #ff6b6b; }
+    #bullets { font-size: 11.5px; line-height: 1.42; color: #cfdae0; margin-top: 10px; }
+    .bullet { margin-bottom: 4px; padding-left: 10px; text-indent: -10px; }
+
+    #markingLabel {
+      margin-top: 12px; padding-top: 9px; border-top: 1px solid #253844;
+      font-size: 9.5px; letter-spacing: 1.6px; color: #8aa0ac; font-weight: bold;
+    }
+    #tokens { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8px; margin-top: 6px; }
+    .tokRow {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10.5px; line-height: 1.5; color: #cfdae0;
+    }
+    .tokDot { width: 6px; height: 6px; border-radius: 50%; flex: 0 0 6px; }
+    .tokName { flex: 1; white-space: nowrap; overflow: hidden; }
+    .tokVal { font-family: Consolas, monospace; font-weight: bold; color: #f4f1e8; }
+    #vector {
+      margin-top: 8px; padding: 5px 6px; border-radius: 4px; background: #0a141b;
+      font-family: Consolas, monospace; font-size: 9px; line-height: 1.35;
+      color: #9fb3bf; word-break: break-all;
+    }
+
+    /* ---------- gran red de Petri ---------- */
+    #stagePetri {
+      position: absolute; left: 0; top: 0; width: 1280px; height: 540px;
+      background: #0b1218; display: none; z-index: 30;
+    }
+    body[data-stage="petri"] #stagePetri { display: block; }
+    body[data-stage="petri"] #panel { display: none; }
+    body[data-stage="petri"] #game { visibility: hidden; }
+    #petriTitle {
+      position: absolute; left: 22px; top: 14px; z-index: 2;
+      font-size: 15px; font-weight: bold; letter-spacing: 2px; color: #f2c14e;
+      background: rgba(11,18,24,.86); padding: 5px 10px; border-radius: 3px;
+    }
+    #petriSvg { position: absolute; left: 20px; top: 42px; width: 1240px; height: 478px; }
+    #petriSvg svg { width: 100%; height: 100%; }
+    #petriSvg .node.on polygon { fill: #2e9e5b !important; stroke: #7ee2a8 !important; }
+    #petriSvg .node.on text { fill: #eaf2f5 !important; }
+    #petriLegend {
+      position: absolute; left: 22px; bottom: 8px; z-index: 2;
+      display: flex; gap: 14px; font-size: 10.5px; color: #9fb3bf;
+      background: rgba(11,18,24,.86); padding: 5px 10px; border-radius: 3px;
+    }
+    #petriLegend b { font-weight: bold; }
+    .lg { display: inline-flex; align-items: center; gap: 5px; }
+    .lg i { width: 14px; height: 3px; display: inline-block; border-radius: 2px; }
+
+    /* ---------- subtítulos ---------- */
+    #caption {
+      position: absolute; left: 0; top: 540px; width: 1280px; height: 180px;
+      padding: 18px 26px 14px; background: #0e1a22; border-top: 2px solid #f2c14e;
+    }
+    #progress { position: absolute; left: 0; top: -2px; width: 1280px; height: 4px; background: #1b2a33; }
+    #progressFill { width: 0; height: 4px; background: #f2c14e; }
+    #captionLabel { font-size: 10px; letter-spacing: 2px; color: #f2c14e; font-weight: bold; }
+    #captionText { font-size: 18px; line-height: 1.4; color: #eaf2f5; margin-top: 7px; max-width: 1215px; min-height: 50px; }
+    #dots { position: absolute; left: 26px; bottom: 12px; display: flex; gap: 5px; }
+    #dots span { width: 7px; height: 7px; border-radius: 50%; background: #2a3d49; }
+    #dots span.on { background: #f2c14e; }
+    #brand { position: absolute; right: 22px; bottom: 9px; font-size: 9.5px; color: #6f8794; }
+
+    /* ---------- tarjeta de cierre ---------- */
+    #endCard {
+      position: absolute; left: 34px; top: 250px; width: 590px; z-index: 40;
+      display: none; padding: 22px 26px 20px; border-radius: 8px;
+      background: rgba(9,17,23,.94); border: 2px solid #f2c14e;
+      box-shadow: 0 18px 50px rgba(0,0,0,.55);
+    }
+    #endCard .ecTitle { font-size: 27px; font-weight: bold; color: #f4f1e8; margin-bottom: 4px; }
+    #endCard .ecSub { font-size: 12px; color: #9fb3bf; margin-bottom: 13px; }
+    #endCard .ecRow { font-size: 15px; color: #eaf2f5; margin-top: 7px; font-family: Consolas, monospace; }
+    #endCard .ecRow b { color: #f2c14e; font-family: "Trebuchet MS", sans-serif; font-size: 11px; letter-spacing: 1px; margin-right: 8px; }
+
+    body[data-stage="cip"] #title { color: #8fc2ff; }
+    body[data-stage="supervisor"] #title { color: #f2c14e; }
+    body[data-stage="deadlock"] #title { color: #ff8a8a; }
+    body[data-stage="prevencion"] #title { color: #7ee2a8; }
+    body[data-stage="cierre"] #title { color: #7ee2a8; }
+  </style>
+</head>
+<body data-stage="intro">
+  <div id="stage">
+    <iframe id="game" src="http://127.0.0.1:5180/" allow="autoplay" title="DairyCraft 2.5D"></iframe>
+
+    <div id="panel">
+      <div id="chapterRow"><span id="chapter">01 · INTRO</span><span id="clock">TURNO 03:00</span></div>
+      <div id="title">DairyCraft 2.5D</div>
+      <div id="badges">
+        <span id="cupoBadge" class="badge off">Cupo: OFF</span>
+        <span id="radarBadge" class="badge verde">Radar: verde</span>
+      </div>
+      <div id="bullets"></div>
+      <div id="markingLabel">MARCADO · m/k</div>
+      <div id="tokens"></div>
+      <div id="vector">M = [6, 3, 1, 1, 0, 0, 0, 1, 0, 0, 0]</div>
+    </div>
+
+    <div id="stagePetri">
+      <div id="petriTitle">RED DE PETRI · 11 LUGARES · 6 TRANSICIONES</div>
+      <div id="petriSvg"></div>
+      <div id="petriLegend">
+        <span class="lg"><i style="background:#5c7280"></i>flujo principal</span>
+        <span class="lg"><i style="background:#4f8fd6"></i>Tanque</span>
+        <span class="lg"><i style="background:#e0a34a"></i>Vapor</span>
+        <span class="lg"><i style="background:#53c2d6"></i>Frío</span>
+        <span class="lg"><i style="background:#e0c04a"></i>Cupo</span>
+        <span class="lg"><i style="background:#63c07d"></i>Embotelladora</span>
+      </div>
+    </div>
+
+    <div id="endCard">
+      <div class="ecTitle">DairyCraft 2.5D</div>
+      <div class="ecSub">Simulador isométrico · autómatas + red de Petri · Laboratorio 1 SED</div>
+      <div class="ecRow"><b>GITHUB</b> github.com/Danie041006/dairycraft-2.5d</div>
+      <div class="ecRow"><b>JUEGO</b> dairycraft-2-5d.vercel.app</div>
+      <div class="ecRow"><b>DOCS</b> docs/TUTORIAL.md · docs/GUIA_CIP_PETRI.md</div>
+    </div>
+
+    <div id="caption">
+      <div id="progress"><div id="progressFill"></div></div>
+      <div id="captionLabel">NARRACIÓN · SUBTÍTULOS</div>
+      <div id="captionText">El juego es la interfaz de un modelo formal: los autómatas gobiernan las máquinas y la red de Petri gobierna los recursos.</div>
+      <div id="dots"></div>
+      <div id="brand">DairyCraft 2.5D · Laboratorio 1 SED · Deivid Peñaloza · Paula Mendoza · Fabian Garcia · Daniel Castellanos</div>
+    </div>
+  </div>
+
+  <script>
+    const PLACES = [
+      { k: 'leche',      n: 'Leche',      cap: 10,  c: '#aab8c0' },
+      { k: 'tanque',     n: 'Tanque',     cap: 3,   c: '#4f8fd6' },
+      { k: 'vapor',      n: 'Vapor',      cap: 1,   c: '#e0a34a' },
+      { k: 'frio',       n: 'Frío',       cap: 1,   c: '#53c2d6' },
+      { k: 'lote_past',  n: 'Lote_past',  cap: 3,   c: '#8fa6b2' },
+      { k: 'lote_enfr',  n: 'Lote_enfr',  cap: 3,   c: '#8fa6b2' },
+      { k: 'cuarto',     n: 'Cuarto',     cap: 4,   c: '#8fa6b2' },
+      { k: 'emb_lista',  n: 'Emb_lista',  cap: 1,   c: '#63c07d' },
+      { k: 'emb_parada', n: 'Emb_parada', cap: 1,   c: '#63c07d' },
+      { k: 'botellas',   n: 'Botellas',   cap: null, c: '#8fa6b2' },
+      { k: 'cupo',       n: 'Cupo',       cap: 4,   c: '#e0c04a' }
+    ];
+    const TRANS = ['t_iniciar_past', 't_fin_past', 't_fin_enfr', 't_embotellar', 't_parar_emb', 't_arrancar_emb'];
+    const TITLES = {
+      t_iniciar_past: 'iniciar', t_fin_past: 'fin_past', t_fin_enfr: 'fin_enfr',
+      t_embotellar: 'embotellar', t_parar_emb: 'parar', t_arrancar_emb: 'arrancar'
+    };
+
+    const tokensEl = document.getElementById('tokens');
+    tokensEl.innerHTML = PLACES.map((p) => `
+      <div class="tokRow" data-k="${p.k}">
+        <span class="tokDot" style="background:${p.c}"></span>
+        <span class="tokName">${p.n}</span>
+        <span class="tokVal" data-k="${p.k}">${p.k === 'cupo' ? '0/4' : (p.k === 'leche' ? '6/10' : (p.k === 'tanque' ? '3/3' : (p.k === 'vapor' || p.k === 'frio' || p.k === 'emb_lista' ? '1/1' : (p.cap ? '0/' + p.cap : '0'))))}</span>
+      </div>`).join('');
+
+    const dotsEl = document.getElementById('dots');
+    for (let i = 0; i < 11; i++) dotsEl.appendChild(document.createElement('span'));
+
+    let lastM = null;
+    let lastEnabled = [];
+    let petriReady = false;
+
+    window.setMarking = (M) => {
+      lastM = M;
+      PLACES.forEach((p, i) => {
+        const el = document.querySelector(`.tokVal[data-k="${p.k}"]`);
+        if (el) el.textContent = p.cap ? `${M[i]}/${p.cap}` : `${M[i]}`;
+      });
+      document.getElementById('vector').textContent = 'M = [' + M.join(', ') + ']';
+      if (!petriReady) return;
+      const svg = document.querySelector('#petriSvg svg');
+      if (!svg) return;
+      svg.querySelectorAll('g.node').forEach((g) => {
+        const title = g.querySelector('title');
+        if (!title) return;
+        const key = title.textContent;
+        const p = PLACES.find((x) => x.k === key);
+        if (!p) return;
+        const texts = g.querySelectorAll('text');
+        if (texts.length > 1) texts[texts.length - 1].textContent = p.cap ? `${M[PLACES.indexOf(p)]}/${p.cap}` : `${M[PLACES.indexOf(p)]}`;
+      });
+    };
+
+    window.setEnabled = (ids) => {
+      lastEnabled = ids;
+      if (!petriReady) return;
+      const svg = document.querySelector('#petriSvg svg');
+      if (!svg) return;
+      svg.querySelectorAll('g.node.on').forEach((g) => g.classList.remove('on'));
+      svg.querySelectorAll('g.node').forEach((g) => {
+        const title = g.querySelector('title');
+        if (title && ids.includes(title.textContent)) g.classList.add('on');
+      });
+    };
+
+    window.setMonitor = (on) => {
+      const b = document.getElementById('cupoBadge');
+      b.textContent = on ? 'Cupo: ON' : 'Cupo: OFF';
+      b.className = 'badge ' + (on ? 'on' : 'off');
+    };
+
+    window.setRadar = (color) => {
+      const b = document.getElementById('radarBadge');
+      b.textContent = 'Radar: ' + color;
+      b.className = 'badge ' + color;
+    };
+
+    window.setClock = (restante) => {
+      const s = Math.max(0, Math.ceil(restante));
+      const mm = String(Math.floor(s / 60)).padStart(2, '0');
+      const ss = String(s % 60).padStart(2, '0');
+      document.getElementById('clock').textContent = `TURNO ${mm}:${ss}`;
+    };
+
+    window.setProgress = (p) => {
+      document.getElementById('progressFill').style.width = `${Math.max(0, Math.min(1, p)) * 100}%`;
+    };
+
+    window.setEndCard = (on) => {
+      document.getElementById('endCard').style.display = on ? 'block' : 'none';
+    };
+
+    window.setChapter = (d) => {
+      document.getElementById('chapter').textContent = d.chapter;
+      document.getElementById('title').textContent = d.title;
+      document.getElementById('bullets').innerHTML = d.bullets.map((b) => `<div class="bullet">• ${b}</div>`).join('');
+      document.getElementById('captionText').textContent = d.caption;
+      document.body.dataset.stage = d.stage;
+      [...dotsEl.children].forEach((el, i) => el.classList.toggle('on', i === d.index));
+    };
+
+    fetch('petri.svg').then((r) => r.text()).then((t) => {
+      const a = t.indexOf('<svg');
+      const b = t.lastIndexOf('</svg>') + 6;
+      document.getElementById('petriSvg').innerHTML = t.slice(a, b);
+      petriReady = true;
+      if (lastM) window.setMarking(lastM);
+      if (lastEnabled.length) window.setEnabled(lastEnabled);
+    }).catch(() => {
+      document.getElementById('petriSvg').textContent = 'No se pudo cargar petri.svg';
+    });
+  </script>
+</body>
+</html>

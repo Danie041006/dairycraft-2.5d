@@ -166,7 +166,7 @@ export class HUDMaquina extends Phaser.Scene {
 
   crearConsola() {
     const visible = false;
-    this.consolaTitulo = texto(this, 552, 424, 'CONSOLA CIP · escribe P S E A Z', {
+    this.consolaTitulo = texto(this, 552, 424, 'CONSOLA CIP · P(SE)+AEZ', {
       fontSize: '10px',
       color: hex(PALETA.acento),
       fontStyle: 'bold'
