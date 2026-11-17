@@ -1,0 +1,73 @@
+{
+  "nombre": "DairyCraft",
+  "descripcion": "Red de Petri de la planta láctea: 3 tanques, caldera (vapor), bomba de frío, embotelladora y cuarto frío. Pre/Post son |T| x |P|; A = Post - Pre.",
+  "lugares": [
+    { "id": "leche", "nombre": "Leche_cruda", "m0": 6, "k": 10, "capacidad": "desborde", "descripcion": "Silo de leche cruda; las llegadas externas agregan tokens." },
+    { "id": "tanque", "nombre": "Tanque_libre", "m0": 3, "k": 3, "capacidad": "estricta", "descripcion": "Tanques disponibles para pasteurizar." },
+    { "id": "vapor", "nombre": "Vapor_disp", "m0": 1, "k": 1, "capacidad": "estricta", "descripcion": "Caldera de vapor; recurso compartido entre pasteurizar y arrancar la embotelladora." },
+    { "id": "frio", "nombre": "Frio_disp", "m0": 1, "k": 1, "capacidad": "estricta", "descripcion": "Bomba de frío; se retiene durante el enfriamiento." },
+    { "id": "lote_past", "nombre": "Lote_past", "m0": 0, "k": 3, "capacidad": "estricta", "descripcion": "Lote en pasteurización." },
+    { "id": "lote_enfr", "nombre": "Lote_enfr", "m0": 0, "k": 3, "capacidad": "estricta", "descripcion": "Lote en enfriamiento." },
+    { "id": "cuarto", "nombre": "Cuarto_frio", "m0": 0, "k": 4, "capacidad": "estricta", "descripcion": "Cuarto frío; capacidad estricta de 4 lotes." },
+    { "id": "emb_lista", "nombre": "Emb_lista", "m0": 1, "k": 1, "capacidad": "estricta", "descripcion": "Embotelladora en marcha." },
+    { "id": "emb_parada", "nombre": "Emb_parada", "m0": 0, "k": 1, "capacidad": "estricta", "descripcion": "Embotelladora detenida; para arrancar necesita vapor." },
+    { "id": "botellas", "nombre": "Botellas", "m0": 0, "k": 999, "capacidad": "desborde", "descripcion": "Lotes embotellados (salida del sistema)." },
+    { "id": "cupo", "nombre": "Cupo_frio", "m0": 4, "k": 4, "capacidad": "estricta", "descripcion": "Lugar monitor de prevención del deadlock: limita a 4 los lotes en el circuito." }
+  ],
+  "transiciones": [
+    { "id": "t_iniciar_past", "nombre": "Iniciar pasteurización", "disparo": "jugador" },
+    { "id": "t_fin_past", "nombre": "Fin de pasteurización", "disparo": "automatica" },
+    { "id": "t_fin_enfr", "nombre": "Descargar al cuarto frío", "disparo": "jugador" },
+    { "id": "t_embotellar", "nombre": "Embotellar un lote", "disparo": "automatica" },
+    { "id": "t_parar_emb", "nombre": "Parar embotelladora", "disparo": "jugador" },
+    { "id": "t_arrancar_emb", "nombre": "Arrancar embotelladora", "disparo": "jugador" }
+  ],
+  "pre": [
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0]
+  ],
+  "post": [
+    [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0],
+    [0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0]
+  ],
+  "monitor": {
+    "lugar": "cupo",
+    "m0": 4,
+    "transiciones": ["t_iniciar_past", "t_embotellar"],
+    "descripcion": "Cupo_frio consume en t_iniciar_past y devuelve en t_embotellar."
+  },
+  "invariantes": [
+    { "nombre": "Tanques", "pesos": { "tanque": 1, "lote_past": 1, "lote_enfr": 1 }, "valor": 3 },
+    { "nombre": "Vapor", "pesos": { "vapor": 1, "lote_past": 1 }, "valor": 1 },
+    { "nombre": "Frío", "pesos": { "frio": 1, "lote_enfr": 1 }, "valor": 1 },
+    { "nombre": "Embotelladora", "pesos": { "emb_lista": 1, "emb_parada": 1 }, "valor": 1 },
+    { "nombre": "Cupo del cuarto frío", "pesos": { "cupo": 1, "lote_past": 1, "lote_enfr": 1, "cuarto": 1 }, "valor": 4 },
+    { "nombre": "Lote total (sin llegadas)", "pesos": { "leche": 1, "lote_past": 1, "lote_enfr": 1, "cuarto": 1, "botellas": 1 }, "valor": 6 }
+  ],
+  "deadlock": {
+    "marcado": { "tanque": 1, "lote_past": 1, "lote_enfr": 1, "cuarto": 4, "emb_parada": 1 },
+    "secuencia": [
+      "t_iniciar_past", "t_fin_past", "t_iniciar_past", "t_fin_enfr", "t_fin_past",
+      "t_iniciar_past", "t_fin_enfr", "t_fin_past", "t_iniciar_past", "t_fin_enfr",
+      "t_fin_past", "t_iniciar_past", "t_fin_enfr", "t_fin_past", "t_iniciar_past",
+      "t_parar_emb"
+    ],
+    "secuenciaTexto": "i f i d f i d f i d f i d f i parar_emb",
+    "prevencion": "Cupo_frio (M0 = 4): t_iniciar_past lo consume y t_embotellar lo devuelve. Invariante: Cupo_frio + Lote_past + Lote_enfr + Cuarto_frio = 4. El marcado muerto exigiría 6 lotes (1 + 1 + 4) en ese circuito, así que es inalcanzable con el monitor.",
+    "reglaCorta": "No iniciar más lotes que el cupo del cuarto frío: 4 en total."
+  },
+  "analisis": {
+    "sinPrevencion": { "marcados": 160, "deadlocks": 1 },
+    "conPrevencion": { "marcados": 146, "deadlocks": 0 },
+    "conflicto": "Vapor_disp es compartido por t_iniciar_past y t_arrancar_emb.",
+    "andJoin": "t_iniciar_past necesita Leche_cruda + Tanque_libre + Vapor_disp (+ Cupo_frio con monitor)."
+  }
+}

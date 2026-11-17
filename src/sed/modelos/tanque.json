@@ -1,0 +1,142 @@
+{
+  "nombre": "Tanque",
+  "descripcion": "Autómata de un tanque pasteurizador. q0 = Vacio; Qm = {Vacio}. Los fallos se detectan durante el llenado (recepción), de modo que el CIP no retiene tokens de la red.",
+  "estados": [
+    "Vacio",
+    "Llenando",
+    "Pasteurizando",
+    "Enfriando",
+    "Lavado_CIP",
+    "Fallo"
+  ],
+  "inicial": "Vacio",
+  "marcados": [
+    "Vacio"
+  ],
+  "eventos": [
+    {
+      "id": "abrir_valvula",
+      "codigo": "a",
+      "nombre": "Abrir válvula",
+      "controlable": true,
+      "observable": true
+    },
+    {
+      "id": "iniciar_past",
+      "codigo": "p",
+      "nombre": "Iniciar pasteurización",
+      "controlable": true,
+      "observable": true
+    },
+    {
+      "id": "fin_past",
+      "codigo": "f",
+      "nombre": "Fin de pasteurización",
+      "controlable": false,
+      "observable": true
+    },
+    {
+      "id": "descargar",
+      "codigo": "d",
+      "nombre": "Descargar al cuarto frío",
+      "controlable": true,
+      "observable": true
+    },
+    {
+      "id": "contaminacion",
+      "codigo": "x",
+      "nombre": "Contaminación",
+      "controlable": false,
+      "observable": true
+    },
+    {
+      "id": "perdida_temp",
+      "codigo": "t",
+      "nombre": "Pérdida de temperatura",
+      "controlable": false,
+      "observable": true
+    },
+    {
+      "id": "iniciar_CIP",
+      "codigo": "i",
+      "nombre": "Iniciar lavado CIP",
+      "controlable": true,
+      "observable": true
+    },
+    {
+      "id": "CIP_ok",
+      "codigo": "c",
+      "nombre": "CIP validado",
+      "controlable": false,
+      "observable": true
+    }
+  ],
+  "transiciones": [
+    [
+      "Vacio",
+      "abrir_valvula",
+      "Llenando"
+    ],
+    [
+      "Llenando",
+      "iniciar_past",
+      "Pasteurizando"
+    ],
+    [
+      "Llenando",
+      "contaminacion",
+      "Fallo"
+    ],
+    [
+      "Llenando",
+      "perdida_temp",
+      "Fallo"
+    ],
+    [
+      "Pasteurizando",
+      "fin_past",
+      "Enfriando"
+    ],
+    [
+      "Enfriando",
+      "descargar",
+      "Vacio"
+    ],
+    [
+      "Fallo",
+      "iniciar_CIP",
+      "Lavado_CIP"
+    ],
+    [
+      "Lavado_CIP",
+      "CIP_ok",
+      "Vacio"
+    ]
+  ],
+  "posiciones": {
+    "Vacio": [
+      190,
+      48
+    ],
+    "Llenando": [
+      62,
+      155
+    ],
+    "Pasteurizando": [
+      190,
+      155
+    ],
+    "Enfriando": [
+      318,
+      155
+    ],
+    "Fallo": [
+      88,
+      300
+    ],
+    "Lavado_CIP": [
+      240,
+      280
+    ]
+  }
+}

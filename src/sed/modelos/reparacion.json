@@ -1,0 +1,36 @@
+{
+  "nombre": "Reparacion_CIP",
+  "descripcion": "DFA del lenguaje de reparación CIP. ^P(SE)+AEZ$: preenjuague, una o más rondas de soda cáustica + enjuague, ácido, enjuague y sanitización. En JFLAP se agrega un estado trampa para que el DFA sea completo.",
+  "regex": "^P(SE)+AEZ$",
+  "simbolos": ["P", "S", "E", "A", "Z"],
+  "estados": ["q0", "q1", "q2", "q3", "q4", "q5", "q6", "Trampa"],
+  "inicial": "q0",
+  "finales": ["q6"],
+  "trampa": "Trampa",
+  "transiciones": [
+    ["q0", "P", "q1"],
+    ["q1", "S", "q2"],
+    ["q2", "E", "q3"],
+    ["q3", "S", "q2"],
+    ["q3", "A", "q4"],
+    ["q4", "E", "q5"],
+    ["q5", "Z", "q6"]
+  ],
+  "descripcionSimbolos": {
+    "P": "Preenjuague",
+    "S": "Soda cáustica",
+    "E": "Enjuague",
+    "A": "Ácido",
+    "Z": "Sanitizar"
+  },
+  "posiciones": {
+    "q0": [40, 120],
+    "q1": [130, 120],
+    "q2": [220, 120],
+    "q3": [310, 120],
+    "q4": [400, 120],
+    "q5": [490, 120],
+    "q6": [580, 120],
+    "Trampa": [310, 230]
+  }
+}
