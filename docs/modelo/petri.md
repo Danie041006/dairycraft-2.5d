@@ -166,9 +166,10 @@ llegar al marcado muerto, `Cupo_frio` valga −2: es inalcanzable.
    - **Reachability/Coverability Graph:** 160 marcados / 1 muerto sin
      prevención; 146 / 0 con prevención.
    - **Invariant Analysis:** los 6 invariantes P de la tabla.
-4. Guardar en `modelos/capturas/`: `04_pipe2_incidencia.png`,
-   `05_pipe2_estado_sin.png`, `06_pipe2_estado_con.png`,
-   `07_pipe2_invariantes.png`.
+4. Guardar en `modelos/capturas/`:
+   `04_pipe2_estado_sin.png`, `05_pipe2_deadlock.png`,
+   `06_pipe2_estado_con.png`, `07_pipe2_incidencia.png` y
+   `08_pipe2_invariantes.png`.
 
 ## 7. Del modelo al juego
 

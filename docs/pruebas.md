@@ -48,7 +48,7 @@ el navegador del aula y el playtest.
 
 > PIPE2: abrir los `.pnml`, ejecutar `Incidence & Marking`, `State Space
 > Analysis`, `Reachability/Coverability Graph` e `Invariant Analysis`; guardar
-> las capturas `04` a `07` en `modelos/capturas/`.
+> las capturas `04` a `08` en `modelos/capturas/`.
 
 ## 2. Pruebas del GDD (sección 5.9 a)
 
