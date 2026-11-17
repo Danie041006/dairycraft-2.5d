@@ -1,5 +1,10 @@
 # Guion del video · máximo 4 minutos
 
+> **Grabación base:** `docs/video-demo.mp4` (30 s, 960×540, sin narración).
+> Muestra el HUD, el CIP, el supervisor, el deadlock, el reintento con
+> **Cupo: ON** y el inspector. El equipo puede grabar la voz sobre esta base
+> o repetir el guion completo con narración.
+
 Objetivo: mostrar el HUD del autómata, una reparación por expresión regular,
 el supervisor CIP y un deadlock provocado y luego prevenido en el radar.
 Grabar la pantalla del simulador a 1280 × 720 o 1920 × 1080, con el navegador

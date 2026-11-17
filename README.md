@@ -155,6 +155,14 @@ npm run build
 - El ZIP debe pesar menos de 25 MB; el bundle es de ~37 kB gzip + Phaser por
   CDN.
 
+## Video
+
+`docs/video-demo.mp4` es una grabación base de 30 s del flujo completo
+(HUD del autómata, consola CIP, supervisor, deadlock, reintento con
+**Cupo: ON** e inspector), sin narración. El guion del video de 4 minutos y
+las tomas están en `docs/VIDEO.md`; el equipo graba la voz sobre esta base o
+repite el guion.
+
 ## Estado
 
 - Modelo formal verificado: ✅ (42/42 pruebas; 146/160; 216/16/200).
@@ -162,7 +170,8 @@ npm run build
 - Capturas del juego: ✅ en `docs/capturas/`.
 - Pendiente: capturas de JFLAP/PIPE2, fps en el equipo, prueba con tableta y
   playtest con otro equipo (celdas ☐ de `docs/pruebas.md`).
-- Video y sustentación: el guion está en `docs/VIDEO.md`.
+- Video y sustentación: el guion está en `docs/VIDEO.md` y la base en
+  `docs/video-demo.mp4` (30 s).
 
 ## Licencia y originalidad
 
