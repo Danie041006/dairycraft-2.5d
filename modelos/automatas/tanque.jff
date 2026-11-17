@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created with JFLAP 7.1. Generado por scripts/generar-modelos.mjs-->
+<structure>
+  <type>fa</type>
+  <automaton>
+    <state id="0" name="Vacio">
+      <x>460</x>
+      <y>176</y>
+      <initial/>
+      <final/>
+    </state>
+    <state id="1" name="Llenando">
+      <x>204</x>
+      <y>390</y>
+    </state>
+    <state id="2" name="Pasteurizando">
+      <x>460</x>
+      <y>390</y>
+    </state>
+    <state id="3" name="Enfriando">
+      <x>716</x>
+      <y>390</y>
+    </state>
+    <state id="4" name="Lavado_CIP">
+      <x>560</x>
+      <y>640</y>
+    </state>
+    <state id="5" name="Fallo">
+      <x>256</x>
+      <y>680</y>
+    </state>
+    <transition>
+      <from>0</from>
+      <to>1</to>
+      <read>a</read>
+    </transition>
+    <transition>
+      <from>1</from>
+      <to>2</to>
+      <read>p</read>
+    </transition>
+    <transition>
+      <from>1</from>
+      <to>5</to>
+      <read>x</read>
+    </transition>
+    <transition>
+      <from>1</from>
+      <to>5</to>
+      <read>t</read>
+    </transition>
+    <transition>
+      <from>2</from>
+      <to>3</to>
+      <read>f</read>
+    </transition>
+    <transition>
+      <from>3</from>
+      <to>0</to>
+      <read>d</read>
+    </transition>
+    <transition>
+      <from>5</from>
+      <to>4</to>
+      <read>i</read>
+    </transition>
+    <transition>
+      <from>4</from>
+      <to>0</to>
+      <read>c</read>
+    </transition>
+  </automaton>
+</structure>

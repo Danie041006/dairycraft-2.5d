@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="dairycraft_sin_prevencion" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name><text>DairyCraft sin prevención</text></name>
+    <page id="page1">
+      <place id="leche">
+        <name><text>Leche_cruda</text></name>
+        <initialMarking><text>6</text></initialMarking>
+        <capacity><text>10</text></capacity>
+        <graphics><position x="80" y="80"/></graphics>
+      </place>
+      <place id="tanque">
+        <name><text>Tanque_libre</text></name>
+        <initialMarking><text>3</text></initialMarking>
+        <capacity><text>3</text></capacity>
+        <graphics><position x="230" y="80"/></graphics>
+      </place>
+      <place id="vapor">
+        <name><text>Vapor_disp</text></name>
+        <initialMarking><text>1</text></initialMarking>
+        <capacity><text>1</text></capacity>
+        <graphics><position x="380" y="80"/></graphics>
+      </place>
+      <place id="frio">
+        <name><text>Frio_disp</text></name>
+        <initialMarking><text>1</text></initialMarking>
+        <capacity><text>1</text></capacity>
+        <graphics><position x="530" y="80"/></graphics>
+      </place>
+      <place id="lote_past">
+        <name><text>Lote_past</text></name>
+        <initialMarking><text>0</text></initialMarking>
+        <capacity><text>3</text></capacity>
+        <graphics><position x="680" y="80"/></graphics>
+      </place>
+      <place id="lote_enfr">
+        <name><text>Lote_enfr</text></name>
+        <initialMarking><text>0</text></initialMarking>
+        <capacity><text>3</text></capacity>
+        <graphics><position x="830" y="80"/></graphics>
+      </place>
+      <place id="cuarto">
+        <name><text>Cuarto_frio</text></name>
+        <initialMarking><text>0</text></initialMarking>
+        <capacity><text>4</text></capacity>
+        <graphics><position x="80" y="240"/></graphics>
+      </place>
+      <place id="emb_lista">
+        <name><text>Emb_lista</text></name>
+        <initialMarking><text>1</text></initialMarking>
+        <capacity><text>1</text></capacity>
+        <graphics><position x="230" y="240"/></graphics>
+      </place>
+      <place id="emb_parada">
+        <name><text>Emb_parada</text></name>
+        <initialMarking><text>0</text></initialMarking>
+        <capacity><text>1</text></capacity>
+        <graphics><position x="380" y="240"/></graphics>
+      </place>
+      <place id="botellas">
+        <name><text>Botellas</text></name>
+        <initialMarking><text>0</text></initialMarking>
+        <capacity><text>999</text></capacity>
+        <graphics><position x="530" y="240"/></graphics>
+      </place>
+      <transition id="t_iniciar_past">
+        <name><text>t_iniciar_past</text></name>
+        <graphics><position x="80" y="420"/></graphics>
+      </transition>
+      <transition id="t_fin_past">
+        <name><text>t_fin_past</text></name>
+        <graphics><position x="230" y="420"/></graphics>
+      </transition>
+      <transition id="t_fin_enfr">
+        <name><text>t_fin_enfr</text></name>
+        <graphics><position x="380" y="420"/></graphics>
+      </transition>
+      <transition id="t_embotellar">
+        <name><text>t_embotellar</text></name>
+        <graphics><position x="530" y="420"/></graphics>
+      </transition>
+      <transition id="t_parar_emb">
+        <name><text>t_parar_emb</text></name>
+        <graphics><position x="680" y="420"/></graphics>
+      </transition>
+      <transition id="t_arrancar_emb">
+        <name><text>t_arrancar_emb</text></name>
+        <graphics><position x="830" y="420"/></graphics>
+      </transition>
+      <arc id="a0" source="leche" target="t_iniciar_past">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a1" source="tanque" target="t_iniciar_past">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a2" source="t_fin_enfr" target="tanque">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a3" source="vapor" target="t_iniciar_past">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a4" source="t_fin_past" target="vapor">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a5" source="vapor" target="t_arrancar_emb">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a6" source="t_arrancar_emb" target="vapor">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a7" source="frio" target="t_fin_past">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a8" source="t_fin_enfr" target="frio">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a9" source="t_iniciar_past" target="lote_past">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a10" source="lote_past" target="t_fin_past">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a11" source="t_fin_past" target="lote_enfr">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a12" source="lote_enfr" target="t_fin_enfr">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a13" source="t_fin_enfr" target="cuarto">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a14" source="cuarto" target="t_embotellar">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a15" source="emb_lista" target="t_embotellar">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a16" source="t_embotellar" target="emb_lista">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a17" source="emb_lista" target="t_parar_emb">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a18" source="t_arrancar_emb" target="emb_lista">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a19" source="t_parar_emb" target="emb_parada">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a20" source="emb_parada" target="t_arrancar_emb">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="a21" source="t_embotellar" target="botellas">
+        <inscription><text>1</text></inscription>
+      </arc>
+    </page>
+  </net>
+</pnml>
