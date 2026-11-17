@@ -9,7 +9,7 @@ Guía para el equipo y para la sustentación. Complementa
 - **Hoja de arte:** `http://localhost:5181/hoja-arte.html`
 - **Repositorio:** https://github.com/Danie041006/dairycraft-2.5d
 - **Guía CIP/Petri:** `docs/GUIA_CIP_PETRI.md`
-- **Video:** [`docs/video-tutorial.mp4`](video-tutorial.mp4) (3:58, voz y subtítulos)
+- **Video:** [`docs/video-tutorial.mp4`](video-tutorial.mp4) (3:58, voz y subtítulos) · [release v1.0.0](https://github.com/Danie041006/dairycraft-2.5d/releases/tag/v1.0.0)
 - **Capítulos del video:** `docs/VIDEO.md`
 
 ---
