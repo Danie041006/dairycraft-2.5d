@@ -17,7 +17,7 @@ monitor de prevención del deadlock.
 juego, la reparación CIP (`P S E A Z` → **Esperado: E**), el supervisor, la red
 de Petri en vivo, el deadlock y la prevención con `Cupo: ON`.
 
-- Release con video y ZIP: https://github.com/Danie041006/dairycraft-2.5d/releases/tag/v1.0.0
+- Release con video y ZIP: https://github.com/Danie041006/dairycraft-2.5d/releases/tag/v1.1.0
 - Ver en GitHub: https://github.com/Danie041006/dairycraft-2.5d/blob/main/docs/video-tutorial.mp4
 - Archivo: [`docs/video-tutorial.mp4`](docs/video-tutorial.mp4)
 - Capítulos y detalles: [`docs/VIDEO.md`](docs/VIDEO.md)

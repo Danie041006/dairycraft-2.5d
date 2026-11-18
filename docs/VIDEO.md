@@ -8,9 +8,9 @@ simulador, a la derecha el capítulo, el marcado en vivo y los badges de
 `Cupo` y del radar.
 
 - **Archivo en el repositorio:** [`docs/video-tutorial.mp4`](video-tutorial.mp4)
-- **Release v1.0.0:** https://github.com/Danie041006/dairycraft-2.5d/releases/tag/v1.0.0
+- **Release v1.1.0:** https://github.com/Danie041006/dairycraft-2.5d/releases/tag/v1.1.0
 - **Ver en GitHub:** https://github.com/Danie041006/dairycraft-2.5d/blob/main/docs/video-tutorial.mp4
-- **Descarga directa (release):** https://github.com/Danie041006/dairycraft-2.5d/releases/download/v1.0.0/video-tutorial.mp4
+- **Descarga directa (release):** https://github.com/Danie041006/dairycraft-2.5d/releases/download/v1.1.0/video-tutorial.mp4
 - **Descarga desde el repositorio:** https://raw.githubusercontent.com/Danie041006/dairycraft-2.5d/main/docs/video-tutorial.mp4
 - **Juego publicado:** https://dairycraft-2-5d.vercel.app/
 - **Guía escrita:** [`docs/TUTORIAL.md`](TUTORIAL.md) y
