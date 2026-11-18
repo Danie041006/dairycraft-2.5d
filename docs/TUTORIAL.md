@@ -116,7 +116,8 @@ izquierda. El inspector muestra las matrices y la ecuación de estado.
 ### 6.1 Provocarlo (con `Cupo: OFF`)
 
 1. Detén la embotelladora (clic en ella o botón **Embot: ON/OFF**).
-2. Embotella 4 lotes hasta llenar el **cuarto frío**.
+2. Descarga 4 lotes al **cuarto frío** hasta llenarlo (4/4); con la
+   embotelladora detenida no se embotella ninguno.
 3. Deja un lote en **Pasteurizando** (retiene vapor) y otro en
    **Enfriando** (retiene frío).
 4. Intenta seguir: el cuarto frío no acepta el quinto lote, la
@@ -251,25 +252,25 @@ con JFLAP/PIPE2:
 
 | entregable | estado |
 |---|---|
-| Simulador local (`npm run preview`) | ✅ |
-| ZIP `Grupo1_DairyCraft.zip` (37 kB, `index.html` en la raíz) | ✅ construido; ☐ subido al aula |
-| `modelos/` `.jff` y `.pnml` | ✅ |
-| Capturas JFLAP/PIPE2 en `modelos/capturas/` | ☐ (las toma el equipo; no hay Java en este entorno) |
+| Simulador local (`npm run preview`) | Listo |
+| ZIP `Grupo1_DairyCraft.zip` (37 kB, `index.html` en la raíz) | Listo construido; Pendiente subido al aula |
+| `modelos/` `.jff` y `.pnml` | Listo |
+| Capturas JFLAP/PIPE2 en `modelos/capturas/` | Listo (8 capturas, 01–08) |
 | `.wmod` de Supremica | opcional (proyecto 1 no lo exige) |
-| `.agents/skills/` con las 3 skills | ✅ |
-| `docs/GDD.md`, `docs/arte.md`, `docs/modelo/` | ✅ |
-| `src/sed/` + JSON + `npm test` | ✅ 42/42 |
-| Repositorio GitHub con README e historial | ✅ |
-| `PROMPTS.md` con los 17 prompts | ✅ |
-| Video de 4 min (HUD, CIP, supervisor, deadlock) | ✅ `docs/video-tutorial.mp4` (3:58, voz y subtítulos) |
-| Informe con tablas 5.2/5.9 y postmortem | ✅ borradores; ☐ filas manuales (fps, tableta, playtest, JFLAP/PIPE2) |
-| URL pública Vercel | ✅ `https://dairycraft-2-5d.vercel.app/` |
-| Prueba en tableta, fps y playtest | ☐ |
-| Sustentación de 15 min | ☐ ensayar con este tutorial |
+| `.agents/skills/` con las 3 skills | Listo |
+| `docs/GDD.md`, `docs/arte.md`, `docs/modelo/` | Listo |
+| `src/sed/` + JSON + `npm test` | Listo (42/42) |
+| Repositorio GitHub con README e historial | Listo |
+| `PROMPTS.md` con los 17 prompts | Listo |
+| Video de 4 min (HUD, CIP, supervisor, deadlock) | Listo: `docs/video-tutorial.mp4` (3:58, voz y subtítulos) |
+| Informe con tablas 5.2/5.9 y postmortem | Listo: tablas JFLAP/PIPE2, fps y celular; Pendiente: playtest |
+| URL pública Vercel | Listo: `https://dairycraft-2-5d.vercel.app/` |
+| fps, prueba táctil y playtest | Listo: fps (60) y táctil en celular (no se contó con tableta); Pendiente: playtest |
+| Sustentación de 15 min | Pendiente ensayar con este tutorial |
 
-**Lo más urgente para el docente:** las capturas de **JFLAP/PIPE2** (revisa
-las tablas antes de autorizar la Fase 2). Después: el **ZIP en el aula** y las
-filas manuales del informe.
+**Lo más urgente para el docente:** ya están las capturas de **JFLAP/PIPE2**
+en `modelos/capturas/`. Falta: el **ZIP en el aula** y el **playtest** con
+otro equipo.
 
 ---
 

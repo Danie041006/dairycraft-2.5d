@@ -230,20 +230,20 @@ Cada logro vale +15 puntos y muestra un aviso animado en el HUD.
 
 | # | criterio | cómo se prueba | estado |
 |:---:|---|---|:---:|
-| 1 | El color e ícono de cada tanque coinciden con su estado | abrir el HUD de 3 tanques en momentos distintos | ☐ |
-| 2 | El grafo del HUD es igual al de `tanque.jff` | comparar la captura con JFLAP | ☐ |
-| 3 | Ningún tanque cambia de estado sin un evento de δ | revisar el historial de 10 eventos del HUD | ☐ |
-| 4 | La consola repara con palabras de \(L\) y rechaza las demás | probar PSESEAEZ (válida) y PSAEZ (inválida) | ☐ |
-| 5 | El supervisor nunca deja 2 tanques en CIP | intentar 3 veces; prueba de 10 000 eventos | ☐ |
-| 6 | Ninguna transición se dispara sin sus tokens | intentar iniciar sin vapor, descargar con el cuarto lleno | ☐ |
-| 7 | El desborde del silo penaliza | dejar llegar leche por encima de 10 | ☐ |
-| 8 | El radar pasa por verde, amarillo y rojo; el deadlock termina | provocar el deadlock y luego prevenirlo | ☐ |
-| 9 | El inspector calcula \(M_k = M_{k-1} + A^T u_k\) | probar 3 disparos a mano | ☐ |
-| 10 | HUD completo en las zonas del GDD y 6 logros con aviso | comparar con la sección 7 | ☐ |
-| 11 | `npm test` pasa completo | `npm test` | ✅ 42/42 |
-| 12 | El build y el preview no tienen errores 404 | `npm run build`, `npm run preview` | ✅ |
-| 13 | El simulador corre con mouse, teclado y táctil | turno con mouse y otro en tableta | ☐ |
-| 14 | El juego coincide con JFLAP y PIPE2 | tablas de `docs/pruebas.md` | ☐ |
+| 1 | El color e ícono de cada tanque coinciden con su estado | abrir el HUD de 3 tanques en momentos distintos | Listo |
+| 2 | El grafo del HUD es igual al de `tanque.jff` | comparar la captura con JFLAP | Listo |
+| 3 | Ningún tanque cambia de estado sin un evento de δ | revisar el historial de 10 eventos del HUD | Listo |
+| 4 | La consola repara con palabras de \(L\) y rechaza las demás | probar PSESEAEZ (válida) y PSAEZ (inválida) | Listo |
+| 5 | El supervisor nunca deja 2 tanques en CIP | intentar 3 veces; prueba de 10 000 eventos | Listo |
+| 6 | Ninguna transición se dispara sin sus tokens | intentar iniciar sin vapor, descargar con el cuarto lleno | Listo |
+| 7 | El desborde del silo penaliza | dejar llegar leche por encima de 10 | Listo |
+| 8 | El radar pasa por verde, amarillo y rojo; el deadlock termina | provocar el deadlock y luego prevenirlo | Listo |
+| 9 | El inspector calcula \(M_k = M_{k-1} + A^T u_k\) | probar 3 disparos a mano | Listo |
+| 10 | HUD completo en las zonas del GDD y 6 logros con aviso | comparar con la sección 7 | Listo |
+| 11 | `npm test` pasa completo | `npm test` | Listo (42/42) |
+| 12 | El build y el preview no tienen errores 404 | `npm run build`, `npm run preview` | Listo |
+| 13 | El simulador corre con mouse, teclado y táctil | turno con mouse y otro en tableta | Listo en celular (no se contó con tableta) |
+| 14 | El juego coincide con JFLAP y PIPE2 | tablas de `docs/pruebas.md` | Listo |
 
 ## 14. Arte
 
@@ -265,5 +265,6 @@ comerciales.
 - **Monitor:** el juego empieza con `Cupo_frio` desactivado para poder mostrar
   el deadlock; el botón **Cupo** lo activa. La red formal de PIPE2 con
   prevención tiene 146 marcados y 0 muertos; sin prevención, 160 y 1.
-- **Pendiente para la sustentación:** capturas de JFLAP/PIPE2, fps en el
-  equipo, prueba con tableta y playtest con otro equipo.
+- **Pendiente para la sustentación:** playtest con otro equipo. Las capturas
+  de JFLAP/PIPE2 y los fps ya están; no se contó con tableta, así que la
+  prueba táctil se hizo en celular.

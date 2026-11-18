@@ -180,14 +180,16 @@ produjo están en [`docs/VIDEO.md`](docs/VIDEO.md).
 
 ## Estado
 
-- Modelo formal verificado: ✅ (42/42 pruebas; 146/160; 216/16/200).
-- Build y preview sin errores en Chromium WebGL: ✅.
-- Capturas del juego: ✅ en `docs/capturas/`.
-- Pendiente: capturas de JFLAP/PIPE2, fps en el equipo, prueba con tableta y
-  playtest con otro equipo (celdas ☐ de `docs/pruebas.md`).
-- Video tutorial: ✅ publicado en `docs/video-tutorial.mp4` y enlazado en
+- Modelo formal verificado: Listo (42/42 pruebas; 146/160; 216/16/200).
+- Build y preview sin errores en Chromium WebGL: Listo.
+- Capturas del juego: Listo en `docs/capturas/`.
+- Capturas de JFLAP/PIPE2: Listo (8 capturas en `modelos/capturas/`).
+- fps medidos (60) y turno completo en computador y celular: Listo.
+- Prueba táctil: Listo en celular; no se contó con tableta.
+- Pendiente: playtest con otro equipo (celdas Pendiente de `docs/pruebas.md`).
+- Video tutorial: Listo, publicado en `docs/video-tutorial.mp4` y enlazado en
   GitHub; capítulos en `docs/VIDEO.md`.
-- Sustentación de 15 min: ☐ ensayar con `docs/TUTORIAL.md`.
+- Sustentación de 15 min: Pendiente (ensayar con `docs/TUTORIAL.md`).
 
 ## Licencia y originalidad
 

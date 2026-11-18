@@ -31,11 +31,11 @@ Por eso:
 
 | palabra | ¿válida? | por qué |
 |---|:---:|---|
-| `P S E S E A E Z` | ✅ | P, dos rondas SE, A, E, Z (la de la ficha) |
-| `P S E A E Z` | ✅ | P, una ronda SE, A, E, Z |
-| `P S E A Z` | ❌ | después de **A** falta **E** antes de **Z** |
-| `P S A E Z` | ❌ | después de **S** falta **E** antes de **A** |
-| `P S E A` | ❌ | falta **Z**; el DFA queda en `q5` |
+| `P S E S E A E Z` | Sí | P, dos rondas SE, A, E, Z (la de la ficha) |
+| `P S E A E Z` | Sí | P, una ronda SE, A, E, Z |
+| `P S E A Z` | No | después de **A** falta **E** antes de **Z** |
+| `P S A E Z` | No | después de **S** falta **E** antes de **A** |
+| `P S E A` | No | falta **Z**; el DFA queda en `q5` |
 
 **`P S E A Z` no se puede completar con Z** porque en `q4` (después de
 `P S E A`) la única transición es `E`, no `Z`. El último símbolo no es un
@@ -150,7 +150,8 @@ En el **Inspector** (`I`):
 **Cómo provocarlo** (con `Cupo: OFF`):
 
 1. Detén la embotelladora (clic en ella o botón **Embot: ON/OFF**).
-2. Embotella 4 lotes hasta llenar el cuarto frío.
+2. Descarga 4 lotes al cuarto frío hasta llenarlo (4/4); con la embotelladora
+   detenida no se embotella ninguno.
 3. Deja un lote en **Pasteurizando** (retiene vapor) y otro en
    **Enfriando** (retiene frío).
 4. Intenta seguir: `t_fin_enfr` no puede meter el quinto lote, `t_fin_past`

@@ -11,11 +11,11 @@ Guardar los PNG en esta carpeta, con estos nombres exactos:
 | archivo | herramienta | qué debe mostrar |
 |---|---|---|
 | `01_tanque_multiple_run.png` | JFLAP | `Input > Multiple Run` con las 8 palabras: 4 aceptadas y 4 rechazadas |
-| `02_reparacion_equivalencia.png` | JFLAP | `PSESEAEZ` y `PSEAEZ` aceptadas; `PSAEZ`, `PSEA` y `PSEEZ` rechazadas, o la equivalencia con `P(SE)+AEZ` |
+| `02_reparacion_equivalencia.png` | JFLAP | `PSESEAEZ` y `PSEAEZ` aceptadas; `PSAEZ`, `PSEA` y `PSEEZ` rechazadas, o la equivalencia con `P(SE)(SE)*AEZ` |
 | `03_cip_supervisor.png` | JFLAP | el autómata `Libre --iniciar_CIP--> Ocupado --CIP_ok--> Libre`; opcional: producto de 2 tanques |
 | `04_pipe2_estado_sin.png` | PIPE2 | State Space / Reachability de `dairycraft_sin_prevencion.pnml`: **160 marcados, 1 deadlock** |
 | `05_pipe2_deadlock.png` | PIPE2 | el marcado muerto y la secuencia de 16 disparos en la variante sin prevención |
-| `06_pipe2_estado_con.png` | PIPE2 | State Space de `dairycraft.pnml`: **146 marcados, 0 deadlocks** y la sexta `t_iniciar_past` deshabilitada |
+| `06_pipe2_estado_con.png` | PIPE2 | State Space de `dairycraft.pnml`: **146 marcados, 0 deadlocks** y la 5.ª `t_iniciar_past` deshabilitada (disparo 12) |
 | `07_pipe2_incidencia.png` | PIPE2 | `Incidence & Marking`: Pre, Post, A y M0 |
 | `08_pipe2_invariantes.png` | PIPE2 | `Invariant Analysis`: los 6 invariantes P |
 
@@ -90,8 +90,8 @@ PSEEZ
 4. Resultado esperado: `PSESEAEZ` y `PSEAEZ` aceptadas; `PSAEZ`, `PSEA` y
    `PSEEZ` rechazadas.
 5. Opcional para la misma captura o una segunda: `Test > Compare Equivalence`
-   contra la expresión `P(SE)+AEZ`. En JFLAP la unión es `+`; la cadena vacía
-   es `!`.
+   contra la expresión `P(SE)(SE)*AEZ`. En JFLAP `+` es **unión**, no “una o
+   más veces”: escribir `P(SE)+AEZ` daría otro lenguaje. La cadena vacía es `!`.
 6. Capturar la tabla de `Multiple Run` o el diálogo de equivalencia.
 
 ### 3.3 `cip_supervisor.jff` → `03_cip_supervisor.png`
@@ -106,6 +106,13 @@ PSEEZ
 ## 4. PIPE2
 
 ### 4.1 Preparación y capacidades
+
+> **PIPE 4.3.0 no lee el PNML estándar** (las pestañas abren vacías). Las capturas
+> se tomaron con las versiones en formato PIPE que están en `modelos/petri/`
+> (`1_dairycraft_SIN_prevencion.xml`, `2_dairycraft_CON_prevencion.xml`); es
+> la misma red. Los archivos `respaldo_*.xml` reemplazan la capacidad del cuarto
+> frío por el lugar complementario `Cuarto_libre`, por si otra versión de PIPE
+> ignora capacidades.
 
 1. `File > Open` → `modelos/petri/dairycraft_sin_prevencion.pnml` (10
    lugares, sin `Cupo_frio`) y `dairycraft.pnml` (11 lugares, con
@@ -156,10 +163,15 @@ de 11 valores en el PNML de 10 lugares.
 
 ### 4.3 `04_pipe2_estado_sin.png`
 
-1. Con la variante sin prevención abierta: `Analysis > State Space Analysis`
-   (o `Reachability/Coverability Graph`).
-2. Comprobar **160 marcados** y **1 deadlock**.
-3. Capturar el resumen y, si se puede, el grafo con el marcado muerto.
+1. **Salir del modo animación** antes de analizar: con *Use current net*, PIPE
+   analiza el marcado actual; si se queda en el marcado muerto, el grafo sale
+   con un solo estado.
+2. `State Space Analysis`: *Deadlock: true* y la ruta más corta de 16
+   disparos que termina en `t_parar_emb`.
+3. `Reachability/Coverability Graph`: *There are 160 states with 355 arcs*.
+   State Space no muestra el número de marcados; ese dato sale de este módulo.
+4. PIPE no deja ambas ventanas abiertas a la vez: la captura 04 une las dos
+   ventanas lado a lado, sin modificarlas.
 
 ### 4.4 `05_pipe2_deadlock.png`
 
@@ -172,9 +184,11 @@ de 11 valores en el PNML de 10 lugares.
 ### 4.5 `06_pipe2_estado_con.png`
 
 1. Abrir `dairycraft.pnml` (11 lugares, `Cupo_frio = 4`).
-2. Repetir la secuencia. Al llegar a la **sexta** `t_iniciar_past`, el monitor
-   `Cupo_frio` debe deshabilitarla; no se alcanza el deadlock.
-3. `Analysis > State Space Analysis`: **146 marcados, 0 deadlocks**.
+2. Repetir la secuencia. En el **disparo 12**, que es la **5.ª**
+   `t_iniciar_past`, el monitor `Cupo_frio` (ya en 0 tras 4 pasteurizaciones)
+   la deshabilita; no se alcanza el deadlock.
+3. Fuera del modo animación: `State Space Analysis` → *Deadlock: false*;
+   `Reachability/Coverability Graph` → *146 states with 321 arcs*.
 4. Capturar el estado con la transición deshabilitada y el resumen 146/0.
 
 ### 4.6 `07_pipe2_incidencia.png`
@@ -194,25 +208,24 @@ de 11 valores en el PNML de 10 lugares.
 
 ## 5. Checklist antes de entregar
 
-- [ ] `01_tanque_multiple_run.png` con 4 aceptadas y 4 rechazadas.
-- [ ] `02_reparacion_equivalencia.png` con `PSESEAEZ`/`PSEAEZ` aceptadas y
+- [x] `01_tanque_multiple_run.png` con 4 aceptadas y 4 rechazadas.
+- [x] `02_reparacion_equivalencia.png` con `PSESEAEZ`/`PSEAEZ` aceptadas y
       `PSAEZ` rechazada.
-- [ ] `03_cip_supervisor.png` con `Libre`/`Ocupado`.
-- [ ] `04_pipe2_estado_sin.png` con **160 / 1**.
-- [ ] `05_pipe2_deadlock.png` con el marcado muerto y la secuencia.
-- [ ] `06_pipe2_estado_con.png` con **146 / 0** y la sexta transición
-      deshabilitada.
-- [ ] `07_pipe2_incidencia.png` con Pre/Post/A y M0.
-- [ ] `08_pipe2_invariantes.png` con los 6 invariantes.
-- [ ] Los PNG están en `modelos/capturas/` y se ven nítidos.
-- [ ] El título de la ventana o el nombre del archivo se lee en la captura.
-- [ ] Las tablas de `docs/pruebas.md` se actualizaron de ☐ a ✅.
-- [ ] Las capturas se enlazaron en `docs/INFORME.md`.
+- [x] `03_cip_supervisor.png` con `Libre`/`Ocupado`.
+- [x] `04_pipe2_estado_sin.png` con **160 / 1**.
+- [x] `05_pipe2_deadlock.png` con el marcado muerto y la secuencia.
+- [x] `06_pipe2_estado_con.png` con **146 / 0**.
+- [x] `07_pipe2_incidencia.png` con Pre/Post/A y M0.
+- [x] `08_pipe2_invariantes.png` con los 6 invariantes.
+- [x] Los PNG están en `modelos/capturas/` y se ven nítidos.
+- [x] El título de la ventana o el nombre del archivo se lee en la captura.
+- [x] Las tablas de `docs/pruebas.md` se actualizaron de Pendiente a Listo.
+- [x] Las capturas se enlazaron en `docs/INFORME.md`.
 
 ## 6. Cómo integrarlas al informe y al repositorio
 
 1. Copiar los 8 PNG a `modelos/capturas/`.
-2. En `docs/pruebas.md`, cambiar las celdas ☐ de JFLAP/PIPE2 por ✅ y agregar
+2. En `docs/pruebas.md`, cambiar las celdas Pendiente de JFLAP/PIPE2 por Listo y agregar
    el nombre del archivo en la columna de evidencia.
 3. En `docs/INFORME.md`, agregar una tabla:
 

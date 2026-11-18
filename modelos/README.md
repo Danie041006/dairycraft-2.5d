@@ -33,8 +33,8 @@ modelos/
 1. Abrir `reparacion.jff`; el estado inicial es `q0` y el final `q6`.
 2. `Input > Multiple Run`: `PSESEAEZ` y `PSEAEZ` aceptan; `PSAEZ`, `PSEA`,
    `PSEEZ` rechazan.
-3. `Test > Compare Equivalence` contra la expresión `P(SE)+AEZ` (en JFLAP la
-   unión es `+` y la cadena vacía `!`).
+3. `Test > Compare Equivalence` contra la expresión `P(SE)(SE)*AEZ` (en JFLAP
+   `+` es unión, no “una o más veces”; la cadena vacía es `!`).
 4. `Convert > Minimize DFA`: el DFA con trampa conserva 8 estados; los 7
    útiles son los del lenguaje.
 5. Captura: `capturas/02_reparacion_equivalencia.png`.
@@ -52,21 +52,23 @@ modelos/
 
 ### 2.1 Deadlock sin prevención
 
-1. Abrir `dairycraft_sin_prevencion.pnml`.
+1. Abrir `petri/1_dairycraft_SIN_prevencion.xml` (PIPE 4.3.0 abre vacío el
+   `.pnml` estándar; por eso se usa la versión `.xml`).
 2. `Animation`: disparar la secuencia de 16 transiciones de
    `docs/modelo/petri.md` §5.
-3. Comprobar el marcado muerto `[0,1,0,0,1,1,4,0,1,0,0]` y que ninguna
-   transición esté habilitada.
-4. `Analysis > State Space Analysis`: debe reportar 160 marcados y 1 deadlock.
+3. Comprobar el marcado muerto `[0,1,0,0,1,1,4,0,1,0]` (10 lugares) y que
+   ninguna transición esté habilitada.
+4. Fuera del modo animación: `State Space Analysis` → deadlock y ruta de 16
+   disparos; `Reachability/Coverability Graph` → 160 estados.
 5. Capturas: `capturas/04_pipe2_estado_sin.png` y
    `capturas/05_pipe2_deadlock.png`.
 
 ### 2.2 Prevención
 
-1. Abrir `dairycraft.pnml`.
-2. Repetir la secuencia. Al llegar a la sexta `t_iniciar_past`, `Cupo_frio`
-   la deshabilita; no se alcanza el deadlock.
-3. `Analysis > State Space Analysis`: 146 marcados y 0 deadlocks.
+1. Abrir `petri/2_dairycraft_CON_prevencion.xml`.
+2. Repetir la secuencia. En el disparo 12 (la 5.ª `t_iniciar_past`),
+   `Cupo_frio` la deshabilita; no se alcanza el deadlock.
+3. Fuera del modo animación: State Space sin deadlock; Reachability 146 estados.
 4. Capturas: `capturas/06_pipe2_estado_con.png`.
 
 ### 2.3 Incidencia e invariantes

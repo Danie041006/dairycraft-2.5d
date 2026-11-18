@@ -191,6 +191,24 @@ observador; reloj; flujo del simulador; game over; reintento.
 - `dist/` se puede comprimir en `Grupo1_DairyCraft.zip` con `index.html` en la
   raíz; el tamaño está muy por debajo de 25 MB.
 
+**Tabla 5.10 · Despliegue local y entrega en el aula**
+
+| dato | valor |
+|---|---|
+| Nombre del archivo ZIP | `Grupo1_DairyCraft.zip` |
+| Tamaño del archivo ZIP (MB) | 0,04 MB |
+| Enlace de previsualización del aula virtual | Pendiente (se completa al subir el ZIP) |
+| Resultado de `npm test` | 42 / 42 |
+
+**Tabla 5.11 · Despliegue en Internet** (obligatorio por indicación del docente)
+
+| dato | valor |
+|---|---|
+| Servicio usado | Vercel (plan Hobby) |
+| Dirección pública del simulador | https://dairycraft-2-5d.vercel.app/ |
+| Verificación en computador | Listo: turno completo |
+| Verificación en celular | Listo: turno completo (victoria, 7 lotes, 74 pts); no se contó con tableta |
+
 ### 4.3 Capturas
 
 | captura | contenido |
@@ -206,8 +224,25 @@ observador; reloj; flujo del simulador; game over; reintento.
 | `docs/capturas/captura-forzar.png` | fallo forzado y botón CIP |
 | `docs/capturas/captura-cip-error.png` | la consola explica que después de A va E |
 
-Las capturas de JFLAP/PIPE2 y las tablas completas de la sección 5.9 están en
-`docs/pruebas.md`; las celdas ☐ son las que el equipo completa en el aula.
+**Capturas del software académico (JFLAP 7.1 y PIPE 4.3.0):**
+
+| captura | evidencia |
+|---|---|
+| `modelos/capturas/01_tanque_multiple_run.png` | 8 palabras del autómata: 4 aceptadas y 4 rechazadas |
+| `modelos/capturas/02_reparacion_equivalencia.png` | DFA CIP: PSESEAEZ y PSEAEZ aceptadas; PSAEZ, PSEA y PSEEZ rechazadas |
+| `modelos/capturas/03_cip_supervisor.png` | supervisor Libre ⇄ Ocupado |
+| `modelos/capturas/04_pipe2_estado_sin.png` | 160 marcados (355 arcos); deadlock y ruta de 16 disparos |
+| `modelos/capturas/05_pipe2_deadlock.png` | marcado muerto `[0,1,0,0,1,1,4,0,1,0]` |
+| `modelos/capturas/06_pipe2_estado_con.png` | 146 marcados (321 arcos); sin deadlock |
+| `modelos/capturas/07_pipe2_incidencia.png` | Post, Pre, A y M0 |
+| `modelos/capturas/08_pipe2_invariantes.png` | 6 invariantes P, incluido `LoteP + LoteE + Cuarto + Cupo = 4` |
+
+PIPE 4.3.0 no lee el PNML estándar, así que se usaron las versiones de
+`modelos/petri/` (archivos `.xml`, misma red). Las capturas 04, 06 y 07 unen varias
+ventanas de PIPE sin modificarlas, porque el programa no permite dos análisis
+abiertos a la vez. Las tablas completas de la sección 5.9 están en
+`docs/pruebas.md`; la celda Pendiente restante (playtest con otro equipo) la completa el equipo. No se contó con tableta: la prueba táctil se
+hizo en celular (Chrome, horizontal).
 
 ## 5. Postmortem
 
@@ -236,8 +271,8 @@ Las capturas de JFLAP/PIPE2 y las tablas completas de la sección 5.9 están en
    y la consola (DFA/RegExp) para la Unidad 2; los tokens con AND-join y el
    radar/inspector para la Unidad 3. El supervisor CIP con el botón rojo es la
    demostración más rápida en la sustentación.
-5. **¿Qué cambiarían con una semana más?** Medir fps con GPU real, probar en
-   tableta, agregar el playtest de otro equipo, capturar JFLAP/PIPE2, mejorar
+5. **¿Qué cambiarían con una semana más?** Probar en una tableta real (no se
+   contó con una), agregar el playtest de otro equipo, mejorar
    el arte de los tanques y añadir un modo “sin llegadas” para comparar el
    árbol con PIPE2. En la Fase 2 del curso se anticipan los autómatas
    temporizados (tiempos de operación) y las redes estocásticas (fallos con

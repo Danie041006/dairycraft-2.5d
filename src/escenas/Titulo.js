@@ -95,7 +95,7 @@ export class Titulo extends Phaser.Scene {
         color: hex(PALETA.acento),
         fontFamily: 'Consolas, monospace'
       });
-      texto(this, 732, 238 + i * 24, accion, {
+      texto(this, 752, 238 + i * 24, accion, {
         fontSize: '11px',
         color: hex(PALETA.textoSuave)
       });
@@ -109,15 +109,15 @@ export class Titulo extends Phaser.Scene {
       textoColor: PALETA.leche
     });
 
-    texto(this, 64, 474, 'Equipo', {
+    texto(this, 300, 462, 'Equipo', {
       fontSize: '10px',
       color: hex(PALETA.textoSuave)
     });
-    texto(this, 64, 490, 'Deivid Peñaloza · Paula Mendoza', {
+    texto(this, 300, 477, 'Deivid Peñaloza · Paula Mendoza', {
       fontSize: '11px',
       color: hex(PALETA.texto)
     });
-    texto(this, 64, 505, 'Fabian Garcia · Daniel Castellanos', {
+    texto(this, 300, 492, 'Fabian Garcia · Daniel Castellanos', {
       fontSize: '11px',
       color: hex(PALETA.texto)
     });

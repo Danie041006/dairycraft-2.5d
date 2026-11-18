@@ -80,7 +80,8 @@ filtros. El equipo los revisó y los aceptó en el GDD; los valores del modelo
 
 ## 5. ¿Qué cambiarían con una semana más? ¿Qué parte de la Fase 2 anticipan?
 
-- Medir fps con GPU real y en tableta; probar el playtest con otro equipo y
+- Probar en una tableta real (no se contó con una; el táctil se probó en
+  celular); hacer el playtest con otro equipo y
   ajustar el balance con esos datos.
 - Agregar un modo “sin llegadas” para que el árbol de cobertura coincida
   exactamente con PIPE2 y comparar nodo a nodo.

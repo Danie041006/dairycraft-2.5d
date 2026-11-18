@@ -128,8 +128,8 @@ t_iniciar_past → t_fin_enfr → t_fin_past → t_iniciar_past →
 t_fin_enfr → t_fin_past → t_iniciar_past → t_parar_emb
 ```
 
-Historia: se embotellan 4 lotes, el cuarto frío queda lleno, la embotelladora
-se detiene, un lote en enfriamiento retiene `Frio_disp` y otro en
+Historia: 4 lotes llegan al cuarto frío sin embotellar ninguno (`Botellas = 0`),
+el cuarto queda lleno, la embotelladora se detiene, un lote en enfriamiento retiene `Frio_disp` y otro en
 pasteurización retiene `Vapor_disp`; `t_fin_enfr` no puede depositar el quinto
 lote, `t_fin_past` no consigue frío, `t_iniciar_past` y `t_arrancar_emb` no
 consiguen vapor. Espera circular.
@@ -154,11 +154,18 @@ llegar al marcado muerto, `Cupo_frio` valga −2: es inalcanzable.
 
 ## 6. Verificación en PIPE2
 
+> **PIPE 4.3.0 no lee el PNML estándar** (las pestañas abren vacías). Las capturas
+> se tomaron con las versiones en formato PIPE que están en `modelos/petri/`
+> (`1_dairycraft_SIN_prevencion.xml`, `2_dairycraft_CON_prevencion.xml`); es
+> la misma red. Los archivos `respaldo_*.xml` reemplazan la capacidad del cuarto
+> frío por el lugar complementario `Cuarto_libre`, por si otra versión de PIPE
+> ignora capacidades.
+
 1. Abrir `dairycraft_sin_prevencion.pnml`; en **Animation** disparar la
    secuencia de 16 transiciones. Comprobar el marcado muerto y que ninguna
    transición queda habilitada.
-2. Abrir `dairycraft.pnml`; repetir la secuencia. Al llegar a la sexta
-   `t_iniciar_past` el monitor `Cupo_frio` la deshabilita; no hay deadlock.
+2. Abrir `dairycraft.pnml`; repetir la secuencia. En el disparo 12 (la 5.ª
+   `t_iniciar_past`) el monitor `Cupo_frio` la deshabilita; no hay deadlock.
 3. Módulos de análisis y capturas:
    - **Incidence & Marking:** Pre, Post, A y M0.
    - **State Space Analysis:** acotada; segura en los lugares de \(k=1\);

@@ -168,7 +168,8 @@ docente la pide.
 2. `Input > Multiple Run`: cargar las 8 palabras de la tabla; las 4 primeras
    terminan en `Vacio` (aceptadas) y las 4 últimas se rechazan.
 3. Abrir `reparacion.jff`; `Test > Compare Equivalence` contra la expresión
-   regular `P(SE)+AEZ` (en JFLAP la unión es `+` y la cadena vacía `!`).
+   regular `P(SE)(SE)*AEZ` (en JFLAP `+` es unión, no “una o más veces”;
+   la cadena vacía es `!`).
 4. `Convert > Minimize DFA` (el DFA con trampa conserva 8 estados; los 7
    útiles son los del lenguaje).
 5. Guardar capturas en `modelos/capturas/` con los nombres

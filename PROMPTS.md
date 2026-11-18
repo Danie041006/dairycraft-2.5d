@@ -16,23 +16,23 @@ que hubo que corregir.
 
 | # | momento | resultado | corrección |
 |:---:|---|---|---|
-| 1 | carpeta + git | ✅ | — |
-| 2 | skill diseñador | ✅ | — |
-| 3 | skill ingeniero | ✅ | — |
-| 4 | skill director de arte | ✅ | — |
-| 5 | comprobar skills + docs/ y referencias/ | ✅ | — |
-| 6 | modelo en Markdown + GDD | ✅ | se fijó la decisión de los fallos en Llenando |
-| 7 | proyecto base Phaser 4 + Vite | ✅ | `base: './'`, Phaser CDN |
-| 8 | núcleo formal + pruebas | ✅ | 42/42; se separó `composicion.js` |
-| 9 | planta isométrica + entidades | ✅ | se movieron celdas y etiquetas |
-| 10 | HUD de máquina | ✅ | se reescribió el layout del grafo |
-| 11 | consola de reparación | ✅ | se separó el DFA del lenguaje de δ |
-| 12 | supervisor u observador | ✅ | supervisor CIP (proyecto 1) |
-| 13 | tokens, AND-join, conflicto, desborde | ✅ | se añadió el monitor ON/OFF |
-| 14 | ecuación de estado + radar | ✅ | se añadió el reintento desde verde |
-| 15 | HUD, logros, táctil, sonido | ✅ | — |
-| 16 | pulido Phaser 4 + pruebas | ✅ | glow manual por limitación de filtros en Graphics |
-| 17 | publicar en Netlify/Vercel | ☐ opcional | no se publicó; el ZIP local está listo |
+| 1 | carpeta + git | Listo | — |
+| 2 | skill diseñador | Listo | — |
+| 3 | skill ingeniero | Listo | — |
+| 4 | skill director de arte | Listo | — |
+| 5 | comprobar skills + docs/ y referencias/ | Listo | — |
+| 6 | modelo en Markdown + GDD | Listo | se fijó la decisión de los fallos en Llenando |
+| 7 | proyecto base Phaser 4 + Vite | Listo | `base: './'`, Phaser CDN |
+| 8 | núcleo formal + pruebas | Listo | 42/42; se separó `composicion.js` |
+| 9 | planta isométrica + entidades | Listo | se movieron celdas y etiquetas |
+| 10 | HUD de máquina | Listo | se reescribió el layout del grafo |
+| 11 | consola de reparación | Listo | se separó el DFA del lenguaje de δ |
+| 12 | supervisor u observador | Listo | supervisor CIP (proyecto 1) |
+| 13 | tokens, AND-join, conflicto, desborde | Listo | se añadió el monitor ON/OFF |
+| 14 | ecuación de estado + radar | Listo | se añadió el reintento desde verde |
+| 15 | HUD, logros, táctil, sonido | Listo | — |
+| 16 | pulido Phaser 4 + pruebas | Listo | glow manual por limitación de filtros en Graphics |
+| 17 | publicar en Vercel (obligatorio por indicación del docente) | Listo | https://dairycraft-2-5d.vercel.app/ |
 
 ## 1. Preparar la carpeta del proyecto
 
@@ -224,13 +224,16 @@ transiciones. `npm test` 42/42.
 `glow`/`bloom`; se reemplazaron por halos concéntricos y flashes aditivos
 estables en WebGL y Canvas.
 
-## 17. Publicar en Netlify o Vercel (opcional)
+## 17. Publicar en Netlify o Vercel (obligatorio por indicación del docente)
 
 > Publica mi simulador en internet con Netlify o Vercel y dame un enlace para
 > compartirlo con mis compañeros.
 
-**Resultado:** no se publicó. El `dist/` está listo para `netlify deploy` o
-`vercel`; el ZIP local es la entrega obligatoria.
+**Resultado:** publicado en Vercel (plan Hobby) con `vercel.json`
+(`npm run build`, carpeta `dist`). Dirección pública:
+https://dairycraft-2-5d.vercel.app/. El docente cambió esta sección de
+opcional a obligatoria para que los compañeros prueben los simuladores y
+den retroalimentación.
 
 ## Decisiones que el agente propuso y el equipo aceptó
 
